@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/*
+ * EOE Club OS 视觉基调：暖白底 + 珊瑚橙主色 + 墨色文字。
+ * 年轻、干净、有人味；不用企业蓝、不用官网红。
+ */
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --ink: #1f1d1a;
+  --ink-2: #5b564e;
+  --ink-3: #8f887d;
+  --line: #ebe5da;
+  --brand: #ff6a3d;
+  --brand-ink: #c2410c;
+  --brand-soft: #fff0e8;
+  --mint: #e6f6ef;
+  --mint-ink: #0f766e;
+  --sky: #eaf2ff;
+  --sky-ink: #1d4ed8;
+  --sun: #fff7d6;
+  --sun-ink: #a16207;
+  --grape: #f3edff;
+  --grape-ink: #6d28d9;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
+  --color-sky: var(--sky);
+  --color-sky-ink: var(--sky-ink);
+  --color-sun: var(--sun);
+  --color-sun-ink: var(--sun-ink);
+  --color-grape: var(--grape);
+  --color-grape-ink: var(--grape-ink);
+  /* 只用系统字体：国内访问稳定，不依赖 Google Fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 卡片 */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+}
+
+/* 成长百科 Markdown 排版 */
+.prose-eoe {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.prose-eoe > * + * { margin-top: 0.6em; }
+.prose-eoe h3 { font-weight: 700; font-size: 1rem; margin-top: 1.1em; }
+.prose-eoe h4 { font-weight: 600; margin-top: 0.9em; }
+.prose-eoe ul { list-style: disc; padding-left: 1.25em; }
+.prose-eoe ol { list-style: decimal; padding-left: 1.4em; }
+.prose-eoe li + li { margin-top: 0.25em; }
+.prose-eoe li::marker { color: var(--ink-3); }
+.prose-eoe a { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+.prose-eoe strong { font-weight: 700; }
+.prose-eoe blockquote {
+  border-left: 3px solid var(--brand);
+  background: var(--brand-soft);
+  padding: 0.5em 0.9em;
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--ink-2);
+}
+.prose-eoe code {
+  background: #f3efe8;
+  padding: 0.1em 0.35em;
+  border-radius: 0.35em;
+  font-size: 0.9em;
+}
+.prose-eoe pre { background: #f3efe8; padding: 0.8em 1em; border-radius: 0.75rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; }
+.prose-eoe pre code { background: none; padding: 0; }
+.prose-eoe table { width: 100%; border-collapse: collapse; font-size: 0.9rem; display: block; overflow-x: auto; }
+.prose-eoe th, .prose-eoe td { border: 1px solid var(--line); padding: 0.4em 0.6em; text-align: left; vertical-align: top; }
+.prose-eoe th { background: #f6f2ea; font-weight: 600; }
+.prose-eoe input[type="checkbox"] { margin-right: 0.4em; accent-color: var(--brand); }
+.prose-eoe ul:has(> li > input[type="checkbox"]) { list-style: none; padding-left: 0.2em; }
+
+/* 隐藏横向滚动条但保留滚动 */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* 底部导航给 iPhone 安全区留空 */
+.pb-safe { padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); }
