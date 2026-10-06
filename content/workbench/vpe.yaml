@@ -1,0 +1,59 @@
+# 官员工作台 · VPE
+# block 类型：list / checklist / links / tools / wiki / guest-sources / text（说明见 src/lib/config.ts）
+# checklist 的勾选只保存在自己的手机/浏览器里；reset: week 每周一清空，month 每月 1 号清空。
+title: VPE
+name_zh: 教育副主席
+emoji: 🎯
+order: 20
+tagline: 让每个人都有机会上台，并且越讲越好。
+wiki: officers/vpe
+blocks:
+  - title: 我的职责
+    type: list
+    items:
+      - 每周例会的角色排期，保证备稿、评估、主持有人
+      - 跟进会员备稿进度（Pathways）
+      - 给新会员安排第一个角色和导师
+      - 每学期至少 1 次教育类活动
+
+  - title: 本周
+    type: checklist
+    reset: week
+    items:
+      - 下周的备稿演讲人已确认
+      - 本周角色接龙已发群
+      - 空缺角色已私聊点名
+      - 本周例会页面信息已更新（和 Meeting Manager 确认）
+      - 会后记录已完成
+
+  - title: 本月
+    type: checklist
+    reset: month
+    items:
+      - 更新一次会员备稿进度表
+      - 本月新会员都拿到了第一个角色
+      - 和 President 同步一次教育目标进展
+
+  - title: 本届任期
+    type: checklist
+    reset: never
+    items:
+      - 定下本届教育目标（参考 DCP）
+      - 办一次教育工作坊（评估 / 即兴 / 演讲结构）
+      - 培养一位下一任 VPE 候选人
+      - 完成换届交接文档
+
+  - title: 常用模板
+    type: links
+    items:
+      - { label: 角色邀请私聊 / 备稿确认话术, url: /wiki/officers/vpe, note: 在成长百科 VPE 页「模板」一节 }
+      - { label: 例会总表, url: "https://docs.qq.com/", note: 示例链接，换成真实腾讯文档 }
+      - { label: 会单模板, url: "", note: 待补充 }
+
+  - title: 相关角色指南
+    type: wiki
+    items: [roles/toastmaster, roles/meeting-manager, roles/general-evaluator, roles/evaluator]
+
+  - title: 外部工具
+    type: tools
+    items: [tencent-doc-roster, pathways, toastmasters, dcp]

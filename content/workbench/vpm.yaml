@@ -1,0 +1,52 @@
+title: VPM
+name_zh: 会员副主席
+emoji: 🤝
+order: 30
+tagline: 让第一次来的人想再来，让来过的人愿意留下。
+wiki: officers/vpm
+blocks:
+  - title: 我的职责
+    type: list
+    items:
+      - 嘉宾接待：会前欢迎、会中照顾、会后跟进
+      - 记录嘉宾来源，定期复盘渠道
+      - 嘉宾转化为会员
+      - 会员续费与留存
+
+  - title: 嘉宾来源
+    type: guest-sources
+    hint: 自动来自每场「会后记录」。想加新渠道，改 content/guest-sources.yaml。
+
+  - title: 嘉宾记录
+    type: text
+    text: |
+      v0.1 只统计嘉宾**人数和来源**，不记录个人信息（避免把 EOE Club OS 做成 CRM）。
+      需要跟进具体嘉宾时，用微信备注或腾讯文档即可。 → [写会后记录](/records/new) · [查看所有记录](/records)
+
+  - title: 跟进事项（每周）
+    type: checklist
+    reset: week
+    items:
+      - 本周嘉宾已提前加好友并发欢迎语
+      - 每位嘉宾都安排了一位老会员陪同
+      - 会后记录里填了嘉宾人数和来源
+      - 24 小时内给每位嘉宾发了感谢私聊
+      - 第二次来的嘉宾，发出了入会邀请
+
+  - title: 本月
+    type: checklist
+    reset: month
+    items:
+      - 看一次运营看板，告诉 VPPR 哪个渠道最好
+      - 检查有没有会员快到续费期
+
+  - title: 会员相关模板
+    type: links
+    items:
+      - { label: 会前欢迎 / 会后跟进话术, url: /wiki/officers/vpm, note: 在成长百科 VPM 页「模板」一节 }
+      - { label: 入会说明（会费、流程）, url: "", note: 待补充 }
+      - { label: 嘉宾 1 分钟反馈表, url: "", note: 待补充 }
+
+  - title: 外部工具
+    type: tools
+    items: [vote-feedback, club-central, toastmasters]

@@ -1,7 +1,7 @@
 import "server-only";
 import { promises as fs } from "fs";
 import path from "path";
-import yaml from "js-yaml";
+import { load as loadYamlText } from "js-yaml";
 import type { LinkItem, Meeting, Tool, ToolCategory } from "@/lib/types";
 
 // YAML 配置加载器：工具/资源、嘉宾来源、官员工作台、本周例会默认值。
@@ -12,7 +12,7 @@ const CONTENT_DIR = path.join(process.cwd(), "content");
 async function loadYaml<T>(rel: string, fallback: T): Promise<T> {
   try {
     const raw = await fs.readFile(path.join(CONTENT_DIR, rel), "utf8");
-    return (yaml.load(raw) as T) ?? fallback;
+    return (loadYamlText(raw) as T) ?? fallback;
   } catch (e) {
     if ((e as NodeJS.ErrnoException).code === "ENOENT") return fallback;
     throw new Error(`content/${rel} 解析失败：${(e as Error).message}`);

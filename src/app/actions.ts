@@ -16,7 +16,9 @@ const int = (v: FormDataEntryValue | null) => {
 const text = (v: FormDataEntryValue | null, max = 2000) => String(v ?? "").trim().slice(0, max);
 const url = (v: FormDataEntryValue | null) => {
   const s = text(v, 1000);
-  return /^https?:\/\//.test(s) ? s : s ? `https://${s}` : undefined;
+  if (!s) return undefined;
+  // 允许站内路径（如 /tools#jielong）；其余没写协议的自动补 https://
+  return /^https?:\/\//.test(s) || /^\/(?!\/)/.test(s) ? s : `https://${s}`;
 };
 
 /** 可选的写入口令（EOE_WRITE_CODE）。不设置则不校验。 */

@@ -99,9 +99,9 @@ export function Pill({ children, tone = "line" }: { children: ReactNode; tone?: 
   return <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs ${tones[tone]}`}>{children}</span>;
 }
 
-export function Markdown({ children }: { children: string }) {
+export function Markdown({ children, invert }: { children: string; invert?: boolean }) {
   return (
-    <div className="prose-eoe">
+    <div className={invert ? "prose-eoe prose-invert" : "prose-eoe"}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

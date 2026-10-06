@@ -1,0 +1,25 @@
+title: Sergeant at Arms
+name_zh: 会务官
+emoji: 🪑
+order: 70
+tagline: 让大家一走进会场就觉得「准备好了」。
+wiki: officers/saa
+blocks:
+  - title: 我的职责
+    type: list
+    items:
+      - 场地预订与确认
+      - 设备、物料、签到
+      - 会前布场、会后复原
+  - title: 每场例会
+    type: checklist
+    reset: week
+    items:
+      - 会前 3 天确认场地
+      - 投影 / 麦克风 / 插线板
+      - 计时设备（配合计时官）
+      - 签到表、名牌、奖品
+      - 会后复原场地
+  - title: 外部工具
+    type: tools
+    items: [speech-assistant]

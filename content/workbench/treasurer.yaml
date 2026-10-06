@@ -1,0 +1,26 @@
+title: Treasurer
+name_zh: 财务
+emoji: 💰
+order: 60
+tagline: 把钱管清楚、讲清楚。
+wiki: officers/treasurer
+blocks:
+  - title: 我的职责
+    type: list
+    items:
+      - 会费收取与提醒
+      - 记录每一笔收支
+      - 定期汇报余额
+  - title: 本月
+    type: checklist
+    reset: month
+    items:
+      - 本月收支已记账
+      - 给官员团队发一次收支小结
+  - title: 常用模板
+    type: links
+    items:
+      - { label: 账本模板, url: "", note: 待补充（腾讯文档）。不要在任何地方写账号密码。 }
+  - title: 外部工具
+    type: tools
+    items: [club-central]

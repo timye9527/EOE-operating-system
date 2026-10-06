@@ -1,0 +1,35 @@
+title: President
+name_zh: 主席
+emoji: 🧭
+order: 10
+tagline: 让官员团队各自做好，俱乐部朝一个方向走。
+wiki: officers/president
+blocks:
+  - title: 我的职责
+    type: list
+    items:
+      - 定本届目标，带官员团队
+      - 每月官员会
+      - 重要场合主持与对外联络
+  - title: 本月
+    type: checklist
+    reset: month
+    items:
+      - 开一次官员会（看运营看板）
+      - 公开感谢至少一位会员 / 官员
+      - 确认各官员没有卡住的事
+  - title: 本届任期
+    type: checklist
+    reset: never
+    items:
+      - 定下本届 3 个目标并公布
+      - 期中回顾一次目标进度
+      - 完成换届交接
+  - title: 常用入口
+    type: links
+    items:
+      - { label: 运营看板, url: /dashboard }
+      - { label: 官员交接文档, url: "", note: 待补充 }
+  - title: 外部工具
+    type: tools
+    items: [club-central, dcp, handover]

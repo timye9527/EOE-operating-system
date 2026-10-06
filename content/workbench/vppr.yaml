@@ -1,0 +1,45 @@
+title: VPPR
+name_zh: 公关副主席
+emoji: 📣
+order: 40
+tagline: 让对的人知道 EOE，并且第一眼就想来。
+wiki: officers/vppr
+blocks:
+  - title: 我的职责
+    type: list
+    items:
+      - 每周例会预告（海报 + 文案），提前 3 天发出
+      - 维护小红书 / 公众号 / 社群
+      - 大型活动的宣传方案
+      - 积累照片、金句、会员故事
+
+  - title: 活动宣传（每周）
+    type: checklist
+    reset: week
+    items:
+      - 从 VPE 拿到主题、时间、主持、亮点
+      - 海报 + 文案完成，并请人核对日期地点
+      - 已发布：小红书
+      - 已发布：公众号 / 朋友圈
+      - 已发布：社群
+      - 会中拍照，会后 24 小时内发回顾
+
+  - title: 渠道
+    type: guest-sources
+    hint: 哪个渠道真的带来了嘉宾？数据来自每场会后记录。
+
+  - title: 海报 / 文案模板
+    type: links
+    items:
+      - { label: 预告文案模板（小红书 / 群公告）, url: /wiki/officers/vppr, note: 在成长百科 VPPR 页「模板」一节 }
+      - { label: 例会海报模板, url: "", note: 待补充：稿定设计 / Canva 链接 }
+
+  - title: 历史案例
+    type: list
+    hint: 把效果好的宣传记在这里（改 content/workbench/vppr.yaml）。
+    items:
+      - 待补充：哪一次宣传带来了最多嘉宾？为什么？
+
+  - title: 外部工具
+    type: tools
+    items: [poster-template, copy-template, xiaohongshu, shared-drive]

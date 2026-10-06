@@ -49,7 +49,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-padding-top: 4.5rem;
+  scroll-padding-top: 7.5rem; /* 顶栏 + 百科章节跳转条 */
 }
 
 body {
@@ -102,6 +102,13 @@ body {
 .prose-eoe th { background: #f6f2ea; font-weight: 600; }
 .prose-eoe input[type="checkbox"] { margin-right: 0.4em; accent-color: var(--brand); }
 .prose-eoe ul:has(> li > input[type="checkbox"]) { list-style: none; padding-left: 0.2em; }
+
+/* 深色底上的 Markdown */
+.prose-invert { color: #fff; }
+.prose-invert li::marker { color: rgba(255, 255, 255, 0.6); }
+.prose-invert a { color: #fff; }
+.prose-invert strong { color: var(--brand); }
+.prose-invert code { background: rgba(255, 255, 255, 0.12); }
 
 /* 隐藏横向滚动条但保留滚动 */
 .no-scrollbar { scrollbar-width: none; }

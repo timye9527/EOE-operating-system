@@ -1,0 +1,127 @@
+# 外部工具 / 资源入口。EOE Club OS 是入口，不要求所有事情都在这里完成。
+#
+# 字段：
+#   id        唯一标识（英文小写+短横线），官员工作台用它引用
+#   name      名称
+#   category  类别（对应下面 categories 的 id）
+#   url       链接（留空 = 待补充，页面显示为灰色）
+#   purpose   用途（一句话）
+#   note      备注
+#   tool      仅投票模板：用的是哪个投票工具
+#
+# ⚠️ 带「示例」字样的链接是占位，请换成 EOE 的真实链接（共享文档链接本身不是密码，但不要放账号密码）。
+
+categories:
+  - { id: meeting, label: 例会协作, emoji: 🗓️ }
+  - { id: vote, label: 投票模板, emoji: 🗳️ }
+  - { id: education, label: 演讲与成长资料, emoji: 🎤 }
+  - { id: promo, label: 宣传与海报, emoji: 📣 }
+  - { id: club, label: EOE 共享资料, emoji: 📁 }
+
+tools:
+  # —— 例会协作 ——
+  - id: tencent-doc-roster
+    name: 例会总表（腾讯文档）
+    category: meeting
+    url: https://docs.qq.com/
+    purpose: 每周角色报名、会单底稿，大家一起改
+    note: 示例链接：换成 EOE 真实的腾讯文档
+  - id: agenda-template
+    name: 会单模板
+    category: meeting
+    url: ""
+    purpose: 每周复制一份，填角色和演讲题目
+    note: 待补充
+  - id: jielong
+    name: 微信群接龙说明
+    category: meeting
+    url: ""
+    purpose: 接龙在微信群里完成，不在 EOE Club OS 里重做
+    note: 建议格式：「本周例会 10/10 接龙：1. 名字-角色」。发群前把本周例会链接一起贴上。
+  - id: speech-assistant
+    name: 演讲助手
+    category: meeting
+    url: ""
+    purpose: 计时、报告等现有工具，直接用，不重做
+    note: 待补充：EOE 常用的演讲助手链接
+
+  # —— 投票模板（第一版不自建投票系统）——
+  - id: vote-best-roles
+    name: 最佳角色投票模板
+    category: vote
+    tool: 腾讯问卷
+    url: https://wj.qq.com/
+    purpose: 每场例会评选最佳备稿演讲 / 最佳即兴 / 最佳评估 / 最佳角色
+    note: 示例链接。每周复制模板，改日期和候选人，再绑定到「本周例会」。
+  - id: vote-theme
+    name: 下期主题征集
+    category: vote
+    tool: 腾讯问卷
+    url: ""
+    purpose: 征集 / 投票选出下一期例会主题
+    note: 待补充
+  - id: vote-feedback
+    name: 嘉宾 1 分钟反馈
+    category: vote
+    tool: 金数据
+    url: ""
+    purpose: 会后给嘉宾的极简反馈表（从哪里知道我们 / 还会再来吗）
+    note: 待补充。可以和会后记录的「嘉宾来源」互相印证。
+
+  # —— 演讲与成长资料 ——
+  - id: toastmasters
+    name: Toastmasters 官网
+    category: education
+    url: https://www.toastmasters.org/
+    purpose: 官方资料、角色说明、俱乐部官员培训
+  - id: pathways
+    name: Pathways 学习体系
+    category: education
+    url: https://www.toastmasters.org/
+    purpose: 会员备稿项目、评估表
+    note: 从官网 Education → Pathways 进入；EOE 常用页面链接待补充
+  - id: club-central
+    name: Club Central（官员后台）
+    category: education
+    url: https://www.toastmasters.org/
+    purpose: 会员续费、官员名单、DCP 目标（需要官员账号登录）
+    note: 登录后在个人页进入 Club Central
+  - id: dcp
+    name: 杰出俱乐部计划 DCP
+    category: education
+    url: https://www.toastmasters.org/
+    purpose: 年度俱乐部目标参考
+    note: 官网搜索 Distinguished Club Program
+
+  # —— 宣传与海报 ——
+  - id: poster-template
+    name: 例会海报模板
+    category: promo
+    url: ""
+    purpose: 每周海报，换主题 / 日期 / 角色即可
+    note: 待补充：稿定设计 / Canva 模板链接
+  - id: copy-template
+    name: 宣传文案模板
+    category: promo
+    url: /wiki/officers/vppr
+    purpose: 公众号 / 小红书 / 朋友圈三个版本
+  - id: xiaohongshu
+    name: EOE 小红书
+    category: promo
+    url: ""
+    purpose: 新人最常见的来源之一
+    note: 待补充账号主页链接
+
+  # —— EOE 共享资料 ——
+  - id: shared-drive
+    name: EOE 共享资料夹
+    category: club
+    url: ""
+    purpose: 历史会单、照片、官员交接资料
+    note: 待补充
+  - id: handover
+    name: 官员交接文档
+    category: club
+    url: ""
+    purpose: 每届官员换届时填写，下一届先读这个
+    note: 待补充
