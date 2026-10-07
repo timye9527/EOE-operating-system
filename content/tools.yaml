@@ -9,7 +9,7 @@
 #   note      备注
 #   tool      仅投票模板：用的是哪个投票工具
 #
-# ⚠️ 带「示例」字样的链接是占位，请换成 EOE 的真实链接（共享文档链接本身不是密码，但不要放账号密码）。
+# url 留空 = 待补充，页面显示为灰色。填 EOE 的真实链接（共享文档链接本身不是密码，但不要放账号密码）。
 
 categories:
   - { id: meeting, label: 例会协作, emoji: 🗓️ }
@@ -23,9 +23,9 @@ tools:
   - id: tencent-doc-roster
     name: 例会总表（腾讯文档）
     category: meeting
-    url: https://docs.qq.com/
+    url: ""
     purpose: 每周角色报名、会单底稿，大家一起改
-    note: 示例链接：换成 EOE 真实的腾讯文档
+    note: 待补充：EOE 真实的腾讯文档链接
   - id: agenda-template
     name: 会单模板
     category: meeting
@@ -50,9 +50,9 @@ tools:
     name: 最佳角色投票模板
     category: vote
     tool: 腾讯问卷
-    url: https://wj.qq.com/
+    url: ""
     purpose: 每场例会评选最佳备稿演讲 / 最佳即兴 / 最佳评估 / 最佳角色
-    note: 示例链接。每周复制模板，改日期和候选人，再绑定到「本周例会」。
+    note: 待补充模板链接。每周复制模板，改日期和候选人，再绑定到「本周例会」。
   - id: vote-theme
     name: 下期主题征集
     category: vote
@@ -103,14 +103,21 @@ tools:
   - id: copy-template
     name: 宣传文案模板
     category: promo
-    url: /wiki/officers/vppr
-    purpose: 公众号 / 小红书 / 朋友圈三个版本
+    url: ""
+    purpose: 例会预告 / 会后回顾的文案模板
+    note: 待补充
   - id: xiaohongshu
     name: EOE 小红书
     category: promo
     url: ""
-    purpose: 新人最常见的来源之一
+    purpose: EOE 主要宣传平台之一（成长百科 VPPR 9.2 已确认）
     note: 待补充账号主页链接
+  - id: quhuo
+    name: 取火小程序
+    category: promo
+    url: ""
+    purpose: EOE 主要宣传平台之一（成长百科 VPPR 9.2 已确认）
+    note: 待补充入口说明
 
   # —— EOE 共享资料 ——
   - id: shared-drive

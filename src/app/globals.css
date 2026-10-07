@@ -99,6 +99,9 @@ body {
 .prose-eoe pre code { background: none; padding: 0; }
 .prose-eoe table { width: 100%; border-collapse: collapse; font-size: 0.9rem; display: block; overflow-x: auto; }
 .prose-eoe th, .prose-eoe td { border: 1px solid var(--line); padding: 0.4em 0.6em; text-align: left; vertical-align: top; }
+/* 表格里不要把英文单词拆开（VPE 被拆成 VP/E）；放不下时表格本身横向滚动 */
+.prose-eoe table { overflow-wrap: break-word; }
+.prose-eoe td, .prose-eoe th { min-width: 4em; }
 .prose-eoe th { background: #f6f2ea; font-weight: 600; }
 .prose-eoe input[type="checkbox"] { margin-right: 0.4em; accent-color: var(--brand); }
 .prose-eoe ul:has(> li > input[type="checkbox"]) { list-style: none; padding-left: 0.2em; }
@@ -109,6 +112,96 @@ body {
 .prose-invert a { color: #fff; }
 .prose-invert strong { color: var(--brand); }
 .prose-invert code { background: rgba(255, 255, 255, 0.12); }
+
+/* ——— 成长百科：可信度标记 ——— */
+/* EOE 已确认：最高优先级，绿色实心徽章 + 整行浅绿 */
+.cred-eoe {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  border-radius: 999px;
+  background: var(--mint-ink);
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.3em 0.6em;
+  margin-right: 0.3em;
+  vertical-align: 0.12em;
+  white-space: nowrap;
+}
+.cred-eoe-date { font-weight: 500; opacity: 0.85; }
+.prose-eoe .eoe-line {
+  background: var(--mint);
+  border-radius: 0.6rem;
+  padding: 0.35em 0.6em;
+  margin-left: -0.6em;
+  margin-right: -0.6em;
+  list-style-position: inside;
+}
+.prose-eoe li.eoe-line::marker { color: var(--mint-ink); }
+
+/* 外部来源编号 [V1]：可点的蓝色小标签；虚线 = 只读到摘要 */
+.cred-ref {
+  display: inline-block;
+  border: 1px solid #bcd0f5;
+  background: var(--sky);
+  color: var(--sky-ink);
+  border-radius: 0.4em;
+  font-size: 0.72em;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0.1em 0.38em;
+  margin: 0 0.12em;
+  vertical-align: 0.12em;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.cred-ref:hover { background: #d9e7ff; }
+.cred-ref-summary { border-style: dashed; background: #fff; }
+.cred-ref-missing { background: var(--brand-soft); border-color: var(--brand); color: var(--brand-ink); cursor: help; }
+
+/* 推论：琥珀色虚线框，整段括号内容变淡 */
+.cred-inf {
+  border-bottom: 1px dashed var(--sun-ink);
+  color: var(--ink-2);
+}
+.cred-inf-tag {
+  display: inline-block;
+  border: 1px dashed var(--sun-ink);
+  background: var(--sun);
+  color: var(--sun-ink);
+  border-radius: 0.4em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0.05em 0.35em;
+  vertical-align: 0.1em;
+}
+
+/* 原文里的 TODO(EOE) 注释 */
+.cred-todo {
+  display: inline-block;
+  border-radius: 999px;
+  background: #f1ede6;
+  color: var(--ink-3);
+  font-size: 0.72em;
+  line-height: 1.2;
+  padding: 0.2em 0.55em;
+  margin-left: 0.3em;
+  vertical-align: 0.12em;
+}
+.wiki-broken { color: var(--ink-3); text-decoration: underline dotted; cursor: help; }
+
+/* 可勾选清单 */
+.prose-eoe ul.task-list { list-style: none; padding-left: 0; }
+.prose-eoe .task-item + .task-item { margin-top: 0.55em; }
+.prose-eoe .task-item.is-done .task-text { opacity: 0.55; text-decoration: line-through; text-decoration-thickness: 1px; }
+.prose-invert .cred-ref { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.prose-invert .cred-ref-summary { background: transparent; }
+.prose-invert .cred-inf { color: rgba(255, 255, 255, 0.8); }
+.prose-invert .cred-eoe { background: #2bb39f; }
+.prose-invert .eoe-line { background: rgba(43, 179, 159, 0.18); }
 
 /* 隐藏横向滚动条但保留滚动 */
 .no-scrollbar { scrollbar-width: none; }

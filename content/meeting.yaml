@@ -1,27 +1,9 @@
 # 本周例会的「默认值」。
-# 平时请直接在网站「本周例会 → 编辑」里改（会保存到数据库）。
+# 平时请直接在网站「本周例会 → 编辑」里填（会保存到数据库）。
 # 只有数据库里还没有任何例会信息时，才会显示这里的内容。
-# ⚠️ 以下是示例数据和示例链接，请换成 EOE 的真实信息。
-date: 2026-10-10
-time: "19:30 - 21:30"
-theme: 示例｜第一次，总是值得被记住
-location: 线下 · 待定（示例）
-meetingManager: 示例·小林
-toastmaster: 示例·阿青
-roles:
-  - { role: 总评估师 General Evaluator, name: 示例·Kevin }
-  - { role: 即兴主持 Table Topics Master, name: 示例·Mia }
-  - { role: 计时官 Timer, name: 示例·小周 }
-  - { role: 语法官 Grammarian, name: 示例·Lily }
-  - { role: 哼哈官 Ah-Counter, name: 示例·大海 }
-  - { role: 备稿演讲 1, name: 示例·Tony }
-  - { role: 备稿演讲 2, name: 示例·Grace }
-  - { role: 个人评估 1, name: 示例·Sam }
-  - { role: 个人评估 2, name: 示例·Coco }
-agendaUrl: https://docs.qq.com/
-docUrl: https://docs.qq.com/
-signupUrl: /tools#jielong
-voteUrl: https://wj.qq.com/
-extraLinks:
-  - { label: 会场导航（示例）, url: "https://map.qq.com/" }
-note: 这是示例数据。点右上角「编辑」换成本周真实信息。
+# 这里故意留空：不放假的示例名字和链接。
+date: ""
+time: ""
+theme: ""
+roles: []
+extraLinks: []

@@ -30,6 +30,7 @@ content/*.md, *.yaml ──> src/lib/content.ts, config.ts ──> 页面（Serv
 ```
 
 - 成长百科页面在构建时静态生成（`generateStaticParams`），访问最快；内容更新需要重新部署（push 即自动部署）。
+- 成长百科的唯一来源是 `docs/eoe-growth-wiki/`。系统只读不写，渲染时用 `src/lib/wiki-remark.ts` 把标记换成徽章 / 标签 / 勾选框，文字一个字不改。
 - 读数据库的页面调用 `getStore()`，其中 `await connection()` 会让页面按请求动态渲染。
 
 ## 数据结构（`src/lib/types.ts`）
@@ -54,10 +55,16 @@ content/*.md, *.yaml ──> src/lib/content.ts, config.ts ──> 页面（Serv
 
 **Tool（`content/tools.yaml`）**：id、name、category、url、purpose、note、tool（投票工具名）。
 
-**WikiEntry（`content/officers|roles/*.md`）**：frontmatter `title, name_zh, emoji, order, summary, status, updated`；正文按 `## 标题` 切成章节。
-- 「60/80/90 分」开头的章节 → 成长路线卡片
-- 含「第一次」→ 顶部深色提示
-- 含「EOE」→ 绿色实践笔记
+**WikiEntry（`docs/eoe-growth-wiki/content/officers|roles/*.md`）**：所在目录决定「官员 / 会议角色」；一级标题解析出中文名 / 英文名（`教育副主席 VPE（Vice President Education）`）；frontmatter 有就优先（兼容 `title / title_zh / name_zh / order / emoji / summary / updated`）。正文按 `## N. 标题` 切成 0–9 节、节内按 `###` 切小节：
+- 第 0 节、`### 9.2 EOE 已确认…` → 绿色（EOE 已确认）
+- 第 5 节 `### 60/80/90 分` → 成长阶梯卡片
+- 第 6 节 → 前人经验卡片
+- 第 8 节 → 深色「明天第一次做」，`- [ ]` 可勾选
+- 正文里的标记：`【EOE 已确认 日期】`/`（EOE 已确认）` 徽章、`[V1]` 来源标签（点开显示 SOURCES.md 里的来源，虚线 = 只读到摘要）、`（推论…）` 推论标签、`<!-- TODO(EOE) -->` 待确认标签
+
+**Source（`research/SOURCES.md`）**：按 `##` 分区，表格中「编号」列的每一行 = 一条来源；`**V1 核心观点**：…` 段落挂到对应编号。
+
+**勾选状态**：没有登录，按设备保存在 localStorage，key = 文件 + 条目文字哈希。同一条清单在百科页和官员工作台共享状态。条目文字一改，勾选会重置（这是有意的：内容变了就该重新看一遍）。
 
 **Workbench（`content/workbench/*.yaml`）**：title、name_zh、emoji、order、tagline、wiki、blocks[]；block 类型：`list | checklist | links | tools | wiki | guest-sources | text`。Checklist 勾选状态只存在浏览器 localStorage，按周/月自动换新——这是有意的：不做催办、不做任务系统。
 

@@ -6,6 +6,7 @@ import { getStore } from "@/lib/store";
 import { todayCN } from "@/lib/date";
 import { MeetingHero, MeetingLinks } from "@/components/Meeting";
 import { formatDate, SectionTitle } from "@/components/ui";
+import { HandoverBanner } from "@/components/wiki/HandoverBanner";
 
 // 首页只回答一个问题：我今天来这里能干什么？
 
@@ -68,12 +69,12 @@ export default async function Home() {
       </div>
 
       {/* 成长百科 */}
-      <SectionTitle more={{ href: "/wiki", label: "全部" }}>成长百科 · 例会角色</SectionTitle>
+      <SectionTitle more={{ href: "/wiki", label: "全部" }}>成长百科</SectionTitle>
       <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
-        {roles.map((r) => (
+        {[...roles, ...officers].map((r) => (
           <Link
-            key={r.slug}
-            href={`/wiki/roles/${r.slug}`}
+            key={r.file}
+            href={`/wiki/${r.group}/${r.slug}`}
             className="card w-32 shrink-0 p-3 transition hover:shadow-sm"
           >
             <span className="text-xl">{r.emoji}</span>
@@ -85,6 +86,9 @@ export default async function Home() {
 
       {/* 官员工作台 */}
       <SectionTitle more={{ href: "/workbench", label: "全部" }}>官员工作台</SectionTitle>
+      <div className="mb-2.5">
+        <HandoverBanner compact />
+      </div>
       <div className="flex flex-wrap gap-2">
         {benches.map((w) => (
           <Link

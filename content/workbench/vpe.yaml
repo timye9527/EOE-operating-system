@@ -46,8 +46,7 @@ blocks:
   - title: 常用模板
     type: links
     items:
-      - { label: 角色邀请私聊 / 备稿确认话术, url: /wiki/officers/vpe, note: 在成长百科 VPE 页「模板」一节 }
-      - { label: 例会总表, url: "https://docs.qq.com/", note: 示例链接，换成真实腾讯文档 }
+      - { label: 例会总表, url: "", note: 待补充：EOE 的腾讯文档链接 }
       - { label: 会单模板, url: "", note: 待补充 }
 
   - title: 相关角色指南

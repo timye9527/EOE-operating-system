@@ -43,7 +43,6 @@ blocks:
   - title: 会员相关模板
     type: links
     items:
-      - { label: 会前欢迎 / 会后跟进话术, url: /wiki/officers/vpm, note: 在成长百科 VPM 页「模板」一节 }
       - { label: 入会说明（会费、流程）, url: "", note: 待补充 }
       - { label: 嘉宾 1 分钟反馈表, url: "", note: 待补充 }
 

@@ -19,6 +19,7 @@ export function MeetingForm({
   const [state, action, pending] = useActionState<ActionState, FormData>(saveMeeting, { ok: true });
   const [, startTransition] = useTransition();
   const [voteUrl, setVoteUrl] = useState(m.voteUrl ?? "");
+  const templates = voteTemplates.filter((t) => t.url);
 
   return (
     <form onSubmit={submitWith(action, startTransition)} className="space-y-4">
@@ -66,16 +67,14 @@ export function MeetingForm({
           <input name="signupUrl" defaultValue={m.signupUrl} placeholder="https://" className={inputCls} />
         </Field>
         <Field label="🗳️ 投票">
-          {voteTemplates.length > 0 && (
+          {templates.length > 0 && (
             <select
               className={`${inputCls} mb-2 text-sm`}
               value=""
               onChange={(e) => e.target.value && setVoteUrl(e.target.value)}
             >
               <option value="">从投票模板中选择…</option>
-              {voteTemplates
-                .filter((t) => t.url)
-                .map((t) => (
+              {templates.map((t) => (
                   <option key={t.id} value={t.url}>
                     {t.name}
                     {t.tool ? `（${t.tool}）` : ""}

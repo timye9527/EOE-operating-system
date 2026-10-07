@@ -1,0 +1,20 @@
+# 成长百科卡片的图标和排序（只管显示，不是内容）。
+# 内容在 docs/eoe-growth-wiki/content/。这里没列到的新角色也会自动出现：默认图标 📘，排在最后。
+# 如果成长百科的 Markdown frontmatter 里写了 emoji / order，以 frontmatter 为准。
+officers:
+  president: { emoji: "🧭", order: 10 }
+  vpe: { emoji: "🎯", order: 20 }
+  vpm: { emoji: "🤝", order: 30 }
+  vppr: { emoji: "📣", order: 40 }
+  secretary: { emoji: "📝", order: 50 }
+  treasurer: { emoji: "💰", order: 60 }
+  saa: { emoji: "🪑", order: 70 }
+roles:
+  toastmaster: { emoji: "🎙️", order: 10 }
+  meeting-manager: { emoji: "🗂️", order: 15 }
+  general-evaluator: { emoji: "🔍", order: 20 }
+  evaluator: { emoji: "💬", order: 30 }
+  table-topics-master: { emoji: "🎲", order: 40 }
+  timer: { emoji: "⏱️", order: 50 }
+  grammarian: { emoji: "📚", order: 60 }
+  ah-counter: { emoji: "👂", order: 70 }

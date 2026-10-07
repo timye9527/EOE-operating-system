@@ -3,12 +3,17 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getGuestSources, getTools, getWorkbench, type WorkbenchBlock } from "@/lib/config";
 import { getWiki } from "@/lib/content";
+import { wikiRenderContext } from "@/lib/wiki-context";
 import { getStore } from "@/lib/store";
 import { computeStats } from "@/lib/stats";
 import type { LinkItem } from "@/lib/types";
 import { Checklist } from "@/components/Checklist";
 import { GuestSourceBars } from "@/components/GuestSourceBars";
 import { LinkTile, Markdown } from "@/components/ui";
+import { SourceProvider } from "@/components/wiki/SourceSheet";
+import { sectionKind, SectionView } from "@/components/wiki/Sections";
+import { WikiMarkdown } from "@/components/wiki/WikiMarkdown";
+import { HandoverBanner } from "@/components/wiki/HandoverBanner";
 
 type Props = { params: Promise<{ officer: string }> };
 
@@ -25,8 +30,22 @@ export default async function WorkbenchPage({ params }: Props) {
   const w = await getWorkbench(officer);
   if (!w) notFound();
 
+  // 成长百科里这位官员的页面（有的话）：第 8 节清单 + EOE 已确认的内容，直接搬到工作台顶部
+  const [g, s] = (w.wiki ?? "").split("/");
+  const wiki = w.wiki ? await getWiki(g, s) : null;
+  const first = wiki?.sections.find((x) => sectionKind(x) === "first");
+  const confirmed = wiki
+    ? [
+        ...wiki.sections.filter((x) => sectionKind(x) === "eoe").map((x) => x.body),
+        ...wiki.sections.flatMap((x) =>
+          x.subsections.filter((sub) => sub.title.includes("EOE") && sub.title.includes("已确认")).map((sub) => sub.body),
+        ),
+      ]
+    : [];
+  const render = wiki ? await wikiRenderContext(wiki.file, [first?.body ?? "", ...confirmed]) : null;
+
   return (
-    <>
+    <SourceProvider sources={render?.sources ?? {}}>
       <nav className="mb-3 text-sm text-ink-3">
         <Link href="/workbench" className="hover:text-brand-ink">
           官员工作台
@@ -43,7 +62,7 @@ export default async function WorkbenchPage({ params }: Props) {
             <p className="text-sm opacity-90">{w.tagline}</p>
           </div>
         </div>
-        {w.wiki && (
+        {wiki && (
           <Link
             href={`/wiki/${w.wiki}`}
             className="mt-4 inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-sm font-semibold text-brand-ink"
@@ -53,6 +72,27 @@ export default async function WorkbenchPage({ params }: Props) {
         )}
       </header>
 
+      {wiki && render && (
+        <div className="mb-6 space-y-3">
+          <p className="text-xs font-semibold tracking-wide text-ink-3">来自成长百科 · {wiki.nameZh}</p>
+          {first && <SectionView s={first} ctx={render.ctx} />}
+          {confirmed.length > 0 && (
+            <section className="rounded-[1.25rem] border border-mint-ink/20 bg-mint p-4">
+              <h2 className="mb-2 text-base font-bold text-mint-ink">EOE 已确认的做法</h2>
+              {confirmed.map((md, i) => (
+                <WikiMarkdown key={i} md={md} ctx={render.ctx} />
+              ))}
+            </section>
+          )}
+          <HandoverBanner compact />
+        </div>
+      )}
+
+      {wiki && (
+        <p className="mb-2 text-xs text-ink-3">
+          下面是工作台的通用提醒（v0.1 草稿），不是 EOE 已确认的规则。
+        </p>
+      )}
       <div className="space-y-3">
         {w.blocks.map((b, i) => (
           <section key={i} className="card p-4">
@@ -67,7 +107,7 @@ export default async function WorkbenchPage({ params }: Props) {
       <p className="mt-6 text-center text-xs text-ink-3">
         这个工作台的内容在 <code>content/workbench/{w.slug}.yaml</code>
       </p>
-    </>
+    </SourceProvider>
   );
 }
 

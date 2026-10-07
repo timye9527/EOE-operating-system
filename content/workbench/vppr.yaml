@@ -20,7 +20,7 @@ blocks:
       - 从 VPE 拿到主题、时间、主持、亮点
       - 海报 + 文案完成，并请人核对日期地点
       - 已发布：小红书
-      - 已发布：公众号 / 朋友圈
+      - 已发布：取火小程序
       - 已发布：社群
       - 会中拍照，会后 24 小时内发回顾
 
@@ -31,7 +31,6 @@ blocks:
   - title: 海报 / 文案模板
     type: links
     items:
-      - { label: 预告文案模板（小红书 / 群公告）, url: /wiki/officers/vppr, note: 在成长百科 VPPR 页「模板」一节 }
       - { label: 例会海报模板, url: "", note: 待补充：稿定设计 / Canva 链接 }
 
   - title: 历史案例
@@ -42,4 +41,4 @@ blocks:
 
   - title: 外部工具
     type: tools
-    items: [poster-template, copy-template, xiaohongshu, shared-drive]
+    items: [poster-template, copy-template, xiaohongshu, quhuo, shared-drive]

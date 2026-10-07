@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { listWorkbenches } from "@/lib/config";
 import { PageHeader } from "@/components/ui";
+import { HandoverBanner } from "@/components/wiki/HandoverBanner";
 
 export const metadata: Metadata = { title: "官员工作台" };
 
@@ -14,6 +15,9 @@ export default async function WorkbenchIndex() {
         title="我是哪位官员？"
         desc="点进去：我的职责、这周 / 这个月该做什么、模板和工具都在哪里。"
       />
+      <div className="mb-4">
+        <HandoverBanner />
+      </div>
       <div className="grid gap-2.5 sm:grid-cols-2">
         {benches.map((w) => (
           <Link

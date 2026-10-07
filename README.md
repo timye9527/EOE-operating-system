@@ -9,7 +9,7 @@ EOE 中文演讲俱乐部内部使用的轻量 Web App。
 EOE Club OS
 首页
 ├── 本周例会      这周的会单 / 腾讯文档 / 接龙 / 投票 / 角色，一个页面全找到
-├── 成长百科 ★    15 个角色指南：职责、会前会中会后、60/80/90 分、踩坑、模板
+├── 成长百科 ★    EOE 成长百科（docs/eoe-growth-wiki/）：0–9 节、60/80/90 分、前人经验、可勾选清单、官员交接
 ├── 官员工作台 ★  每位官员：我的职责、本周/本月 checklist、模板、工具
 ├── 运营记录      会后 1 分钟记录（含嘉宾来源）
 └── 运营看板      例会数、平均出席、累计嘉宾、嘉宾来源、近期趋势
@@ -54,14 +54,18 @@ npm run dev          # 打开 http://localhost:3000
 
 | 想改什么 | 改哪里 |
 |---|---|
-| 某个角色的指南（VPE、Timer…） | `content/officers/*.md`、`content/roles/*.md` |
-| 给某个角色追加研究资料 / 前人经验 | 新建 `content/notes/<角色文件名>/<任意名>.md` |
-| 新增一个角色 | 复制 `content/_templates/role-template.md` |
+| 成长百科：某个角色的指南（VPE、主持人…） | `docs/eoe-growth-wiki/content/officers/*.md`、`.../roles/*.md` |
+| 成长百科：新增一个角色 | 往上面两个目录之一放一个 `.md`，按现有角色的 0–9 节结构写，**不用改代码** |
+| 成长百科：EOE 现状 / 官员交接 / 资料来源 | `docs/eoe-growth-wiki/content/eoe-context.md`、`handover.md`、`research/SOURCES.md` |
+| 成长百科卡片的图标和排序（可选） | `content/wiki-display.yaml` |
 | 官员工作台 | `content/workbench/*.yaml` |
 | 外部工具、投票模板、海报模板 | `content/tools.yaml` |
 | 嘉宾来源选项 | `content/guest-sources.yaml` |
 
 改完 → 提交到 GitHub → 重新部署即上线。可以直接在 GitHub 网页上编辑 Markdown。
+
+成长百科的写作规则见 `docs/eoe-growth-wiki/` 里的说明（接入方案：[docs/plan-growth-wiki.md](docs/plan-growth-wiki.md)）。系统只负责显示，**不会改写正文**：
+`【EOE 已确认 日期】` 显示成绿色徽章，`[V1]` 显示成可点开的来源标签，`（推论…）` 显示成推论标签，`- [ ]` 变成可勾选清单（勾选状态存在本机）。
 
 **本周例会**和**会后记录**是在网站上直接填写的（存数据库），不需要改文件。
 
@@ -105,7 +109,9 @@ src/app/            ← 页面（每个文件夹 = 一个网址）
 src/components/     ← 共用 UI
 src/lib/
   types.ts            数据结构（改这里要同步 supabase/schema.sql）
-  content.ts          成长百科加载器（Markdown → 章节）
+  content.ts          成长百科加载器（docs/eoe-growth-wiki → 0–9 节）
+  sources.ts          资料来源总表解析（research/SOURCES.md）
+  wiki-remark.ts      可信度标记 / 来源标签 / 可勾选清单（只改显示，不改文字）
   config.ts           YAML 加载器（工具、工作台、嘉宾来源）
   store/              存储层：local.ts（JSON 文件）/ supabase.ts
   stats.ts            看板统计
