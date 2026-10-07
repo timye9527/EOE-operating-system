@@ -11,7 +11,7 @@ export function sectionKind(s: Pick<WikiSection, "num" | "label">): SectionKind 
     const byNum: Partial<Record<number, SectionKind>> = { 0: "eoe", 5: "levels", 6: "stories", 8: "first", 9: "practice" };
     return byNum[s.num] ?? "plain";
   }
-  // 没编号的节（交接指南、EOE 现状）按标题判断
+  // 没编号的节（交接指南、EOE 背景）按标题判断
   const t = s.label;
   if (t.includes("EOE") && t.includes("已确认")) return "eoe";
   if (/60\s*\/\s*80\s*\/\s*90/.test(t)) return "levels";

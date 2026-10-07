@@ -7,7 +7,7 @@ import { supabaseStore } from "./supabase";
 /**
  * 存储接口。只有两类真正需要写入的数据：
  * - 会后记录（records）
- * - 本周例会（kv: current_meeting）
+ * - 下一场例会（kv: current_meeting，可选，过期自动隐藏）
  * 其余内容（成长百科、工作台、工具）都在 content/ 里，用 Git 管理。
  */
 export interface Store {

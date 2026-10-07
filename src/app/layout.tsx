@@ -4,7 +4,7 @@ import { BottomNav, TopBar } from "@/components/Nav";
 
 export const metadata: Metadata = {
   title: { default: "EOE Club OS", template: "%s · EOE Club OS" },
-  description: "EOE 中文演讲俱乐部的内部入口：本周例会、成长百科、官员工作台、运营记录。",
+  description: "EOE 中文演讲俱乐部的内部入口：例会、成长百科、官员工作台、运营记录。",
 };
 
 export const viewport: Viewport = {

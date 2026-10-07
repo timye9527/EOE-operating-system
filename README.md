@@ -8,7 +8,7 @@ EOE 中文演讲俱乐部内部使用的轻量 Web App。
 ```
 EOE Club OS
 首页
-├── 本周例会      这周的会单 / 腾讯文档 / 接龙 / 投票 / 角色，一个页面全找到
+├── 例会          每次例会都用得上的入口（总表 / 接龙 / 投票模板 / 角色指南）；下一场例会可选填写，过期自动隐藏
 ├── 成长百科 ★    EOE 成长百科（docs/eoe-growth-wiki/）：0–9 节、60/80/90 分、前人经验、可勾选清单、官员交接
 ├── 官员工作台 ★  每位官员：我的职责、本周/本月 checklist、模板、工具
 ├── 运营记录      会后 1 分钟记录（含嘉宾来源）
@@ -57,7 +57,7 @@ npm run dev          # 打开 http://localhost:3000
 |---|---|
 | 成长百科：某个角色的指南（VPE、主持人…） | `docs/eoe-growth-wiki/content/officers/*.md`、`.../roles/*.md` |
 | 成长百科：新增一个角色 | 往上面两个目录之一放一个 `.md`，按现有角色的 0–9 节结构写，文件名用英文小写和短横线（如 `meeting-manager.md`），**不用改代码** |
-| 成长百科：EOE 现状 / 官员交接 / 资料来源 | `docs/eoe-growth-wiki/content/eoe-context.md`、`handover.md`、`research/SOURCES.md` |
+| 成长百科：EOE 背景 / 官员交接 / 资料来源 | `docs/eoe-growth-wiki/content/eoe-context.md`、`handover.md`、`research/SOURCES.md` |
 | 成长百科卡片的图标和排序（可选） | `content/wiki-display.yaml` |
 | 官员工作台 | `content/workbench/*.yaml` |
 | 外部工具、投票模板、海报模板 | `content/tools.yaml` |
@@ -68,7 +68,9 @@ npm run dev          # 打开 http://localhost:3000
 成长百科的写作规则见 `docs/eoe-growth-wiki/` 里的说明（接入方案：[docs/plan-growth-wiki.md](docs/plan-growth-wiki.md)）。系统只负责显示，**不会改写正文**：
 `【EOE 已确认 日期】` 显示成绿色徽章，`[V1]` 显示成可点开的来源标签，`（推论…）` 显示成推论标签，`- [ ]` 变成可勾选清单（勾选状态存在本机）。
 
-**本周例会**和**会后记录**是在网站上直接填写的（存数据库），不需要改文件。
+**下一场例会**（可选）和**会后记录**是在网站上直接填写的（存数据库）。下一场例会的日期一过就自动隐藏，不用回来删。
+
+**保持通用、免维护**：这个系统不会被定期维护，所以成长百科和页面文案里不写人数、日期、「本周 / 最新 / 目前」这类会过期的信息。
 
 ## 3. 部署
 
@@ -100,7 +102,7 @@ Next.js 16（App Router）+ TypeScript + Tailwind CSS v4，存储为 Supabase �
 content/            ← 全部内容（Markdown / YAML），见 content/README.md
 src/app/            ← 页面（每个文件夹 = 一个网址）
   page.tsx            首页
-  meeting/            本周例会（+ edit 编辑）
+  meeting/            例会（+ edit 可选填写下一场）
   wiki/               成长百科
   workbench/          官员工作台
   records/            运营记录（+ new 会后记录、[id] 详情）

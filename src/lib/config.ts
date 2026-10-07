@@ -4,7 +4,7 @@ import path from "path";
 import { load as loadYamlText } from "js-yaml";
 import type { LinkItem, Meeting, Tool, ToolCategory } from "@/lib/types";
 
-// YAML 配置加载器：工具/资源、嘉宾来源、官员工作台、本周例会默认值。
+// YAML 配置加载器：工具/资源、嘉宾来源、官员工作台、下一场例会默认值。
 // 全部在 content/ 下，改 YAML 即可，不需要改代码。
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
@@ -33,7 +33,7 @@ export async function getGuestSources(): Promise<string[]> {
   return data.sources ?? ["朋友邀请", "其他"];
 }
 
-// ———— 本周例会默认值（数据库里还没有时使用） ————
+// ———— 下一场例会默认值（数据库里还没有时使用；可选） ————
 
 export async function getMeetingSeed(): Promise<Meeting> {
   const m = await loadYaml<Omit<Partial<Meeting>, "date"> & { date?: string | Date }>("meeting.yaml", {});

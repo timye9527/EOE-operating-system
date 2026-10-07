@@ -31,8 +31,8 @@ export default async function WikiIndex() {
           <Link href="/wiki/context" className="card flex items-center gap-3 p-4 transition hover:shadow-sm">
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-mint text-xl">🌱</span>
             <span className="min-w-0">
-              <span className="block font-bold">先读这个：EOE 现状与背景</span>
-              <span className="block text-sm text-ink-2">我们是谁、多少人、已经确认了哪些规则</span>
+              <span className="block font-bold">先读这个：EOE 背景</span>
+              <span className="block text-sm text-ink-2">我们是谁、已经确认了哪些规则</span>
             </span>
           </Link>
         )}

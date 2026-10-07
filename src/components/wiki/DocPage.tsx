@@ -6,7 +6,7 @@ import { SourceProvider } from "./SourceSheet";
 import { WikiMarkdown } from "./WikiMarkdown";
 import { SectionView } from "./Sections";
 
-// 通用文档页（EOE 现状 / 官员交接）：一级标题 + 前言 + 各节，原文照排。
+// 通用文档页（EOE 背景 / 官员交接）：一级标题 + 前言 + 各节，原文照排。
 export async function DocPage({ doc, eyebrow, top }: { doc: WikiDoc; eyebrow: string; top?: ReactNode }) {
   const { ctx, sources } = await wikiRenderContext(doc.file, [doc.preamble, ...doc.sections.map((s) => s.body)]);
   return (

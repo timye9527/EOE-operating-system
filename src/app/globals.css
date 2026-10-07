@@ -130,7 +130,6 @@ body {
   vertical-align: 0.12em;
   white-space: nowrap;
 }
-.cred-eoe-date { font-weight: 500; opacity: 0.85; }
 .prose-eoe .eoe-line {
   background: var(--mint);
   border-radius: 0.6rem;

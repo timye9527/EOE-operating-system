@@ -15,10 +15,10 @@ const components: Components = {
     const p = node?.properties ?? {};
     if (has(className, "cred-ref")) return <SourceRef id={String(p.dataRef)} missing={!!p.dataMissing} />;
     if (has(className, "cred-eoe")) {
-      const date = String(p.dataDate ?? "");
+      // 不显示确认日期：规则长期有效，日期只会让人以为需要定期更新
       return (
         <span className="cred-eoe" title="EOE 自己确认过的规则，优先级最高">
-          ✓ EOE 已确认{date && <span className="cred-eoe-date">{date}</span>}
+          ✓ EOE 已确认
         </span>
       );
     }

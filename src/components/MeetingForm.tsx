@@ -5,7 +5,7 @@ import { saveMeeting, type ActionState } from "@/app/actions";
 import type { Meeting, Tool } from "@/lib/types";
 import { Field, FormError, inputCls, submitWith, SubmitButton, WriteCodeField } from "@/components/forms";
 
-// 编辑本周例会。纯文本输入为主：角色「角色：名字」一行一个，额外链接「名称 | 链接」一行一个。
+// 填写下一场例会（可选）。纯文本输入为主：角色「角色：名字」一行一个，额外链接「名称 | 链接」一行一个。
 
 export function MeetingForm({
   meeting: m,
@@ -24,8 +24,8 @@ export function MeetingForm({
   return (
     <form onSubmit={submitWith(action, startTransition)} className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <Field label="日期">
-          <input name="date" type="date" defaultValue={m.date} className={inputCls} />
+        <Field label="日期" hint="过了就自动隐藏">
+          <input name="date" type="date" required defaultValue={m.date} className={inputCls} />
         </Field>
         <Field label="时间">
           <input name="time" defaultValue={m.time} placeholder="19:30 - 21:30" className={inputCls} />
@@ -107,7 +107,7 @@ export function MeetingForm({
 
       <WriteCodeField required={writeCodeRequired} />
       <FormError error={state.error} />
-      <SubmitButton pending={pending}>保存本周例会</SubmitButton>
+      <SubmitButton pending={pending}>保存</SubmitButton>
     </form>
   );
 }

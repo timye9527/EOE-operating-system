@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { getStore, storeMode } from "@/lib/store";
 import type { GuestSourceCount, LinkItem, Meeting, RoleAssignment } from "@/lib/types";
 
-// 所有写操作都在这里。v0.1 只有三种写入：新增/删除会后记录、保存本周例会。
+// 所有写操作都在这里。只有三种写入：新增/删除会后记录、保存下一场例会（可选）。
 
 export type ActionState = { ok: boolean; error?: string };
 
@@ -89,7 +89,7 @@ export async function deleteRecord(_prev: ActionState, form: FormData): Promise<
   redirect("/records");
 }
 
-// ———— 本周例会 ————
+// ———— 下一场例会（可选，日期过了自动隐藏） ————
 
 /** 「角色：名字」一行一个 → RoleAssignment[] */
 function parseRoles(raw: string): RoleAssignment[] {
@@ -114,6 +114,10 @@ function parseLinks(raw: string): LinkItem[] {
 export async function saveMeeting(_prev: ActionState, form: FormData): Promise<ActionState> {
   const denied = checkWriteCode(form);
   if (denied) return { ok: false, error: denied };
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text(form.get("date"), 10))) {
+    return { ok: false, error: "请选择例会日期（日期过了，这场的信息会自动隐藏）" };
+  }
 
   const meeting: Meeting = {
     date: text(form.get("date"), 10),

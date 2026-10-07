@@ -25,7 +25,7 @@ export type ToolCategory = { id: string; label: string; emoji?: string };
 /** 例会上的一个角色分配 */
 export type RoleAssignment = { role: string; name: string };
 
-/** 本周例会（存储在数据库 kv: current_meeting，缺省时读 content/meeting.yaml） */
+/** 下一场例会（可选；存储在数据库 kv: current_meeting，缺省时读 content/meeting.yaml；日期过了自动不显示） */
 export type Meeting = {
   date: string; // YYYY-MM-DD
   time: string; // 例如 "19:30-21:30"

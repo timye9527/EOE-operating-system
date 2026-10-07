@@ -235,7 +235,6 @@
 
   /* —— 可信度三种标记 —— */
   .eoe { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; background: var(--eoe); color: var(--on-eoe); border-radius: 999px; font-size: 11.5px; font-weight: 700; line-height: 1; padding: 4px 8px; margin-right: 4px; vertical-align: 1px; }
-  .eoe i { font-style: normal; font-weight: 500; opacity: 0.85; }
   .first .eoe { background: var(--eoe-soft); color: var(--eoe); }
   .md .eoe-line { background: var(--eoe-soft); border-radius: 10px; padding: 6px 10px; margin-inline: -10px; list-style-position: inside; }
   .md li.eoe-line::marker { color: var(--eoe); }
@@ -381,7 +380,7 @@
       <h2 class="group-title">明天第一次做？</h2>
       <div class="first-grid">${firstTiles}</div>
       <div class="list">
-        ${D.context ? `<a class="cell" href="#context"><span class="tile icon">${ICON.leaf}</span><span class="cell-main"><span class="cell-title">先读：EOE 现状与背景</span><span class="cell-sub">我们是谁、多少人、已经确认了哪些规则</span></span>${ICON.chev}</a>` : ""}
+        ${D.context ? `<a class="cell" href="#context"><span class="tile icon">${ICON.leaf}</span><span class="cell-main"><span class="cell-title">先读：EOE 背景</span><span class="cell-sub">我们是谁、已经确认了哪些规则</span></span>${ICON.chev}</a>` : ""}
         ${D.handover ? `<a class="cell" href="#handover"><span class="tile icon">${ICON.hand}</span><span class="cell-main"><span class="cell-title">官员交接指南</span><span class="cell-sub">换届前后都看这里，附可勾选的交接清单</span></span>${ICON.chev}</a>` : ""}
         <a class="cell" href="#sources"><span class="tile icon">${ICON.book}</span><span class="cell-main"><span class="cell-title">资料来源</span><span class="cell-sub">每条 [V1] 这样的编号都能查到出处</span></span>${ICON.chev}</a>
       </div>
@@ -391,7 +390,7 @@
         <div><span class="ref" aria-hidden="true">V1</span><span>前人经验，点一下看出处；虚线框 = 只读到摘要</span></div>
         <div><span class="cred-inf"><span class="cred-inf-tag">推论</span></span><span>综合多方资料的判断，不是原话</span></div>
       </div>
-      <p class="foot">内容来自 EOE 成长百科 v1 · 勾选只保存在这台手机</p>`;
+      <p class="foot">内容来自 EOE 成长百科 · 勾选只保存在这台手机</p>`;
   }
 
   function viewRoles() {
@@ -518,7 +517,7 @@
       const r = roleByKey[page];
       html = viewRole(r); title = r.nameZh || r.title; tab = "roles"; back = true;
     } else if (page === "context" && D.context) {
-      html = viewDoc(D.context); title = "EOE 现状"; tab = "home"; back = true;
+      html = viewDoc(D.context); title = "EOE 背景"; tab = "home"; back = true;
     } else if (page === "handover" && D.handover) {
       html = viewHandover(); title = TABS.handover; tab = "handover";
     } else if (page === "sources") {

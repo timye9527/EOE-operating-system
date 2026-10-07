@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { getCurrentMeeting } from "@/lib/meeting";
+import { getUpcomingMeeting } from "@/lib/meeting";
 import { listWiki } from "@/lib/content";
-import { listWorkbenches } from "@/lib/config";
+import { getTools, listWorkbenches } from "@/lib/config";
 import { getStore } from "@/lib/store";
-import { todayCN } from "@/lib/date";
-import { MeetingHero, MeetingLinks } from "@/components/Meeting";
+import { MeetingHero, MeetingLinks, MeetingResources } from "@/components/Meeting";
 import { formatDate, SectionTitle } from "@/components/ui";
 import { HandoverBanner } from "@/components/wiki/HandoverBanner";
 
@@ -30,31 +29,37 @@ const ACTIONS = [
 
 export default async function Home() {
   const store = await getStore();
-  const [meeting, roles, officers, benches, records] = await Promise.all([
-    getCurrentMeeting(),
+  const [meeting, { tools }, roles, officers, benches, records] = await Promise.all([
+    getUpcomingMeeting(),
+    getTools(),
     listWiki("roles"),
     listWiki("officers"),
     listWorkbenches(),
     store.listRecords(),
   ]);
-  const today = todayCN();
-
   return (
     <>
       <div className="mb-4">
-        <p className="text-sm text-ink-3">
-          {formatDate(today)} · {greeting()} 👋
-        </p>
+        <p className="text-sm text-ink-3">{greeting()} 👋</p>
         <h1 className="mt-0.5 text-2xl font-black tracking-tight md:text-3xl">今天想做点什么？</h1>
       </div>
 
-      {/* 本周例会 */}
-      <Link href="/meeting" className="block transition active:scale-[0.99]">
-        <MeetingHero m={meeting} compact />
-      </Link>
-      <div className="mt-2.5">
-        <MeetingLinks m={meeting} compact />
-      </div>
+      {/* 例会：有填写下一场就显示；没有（或已过期）就只显示长期有效的入口 */}
+      {meeting ? (
+        <>
+          <Link href="/meeting" className="block transition active:scale-[0.99]">
+            <MeetingHero m={meeting} compact />
+          </Link>
+          <div className="mt-2.5">
+            <MeetingLinks m={meeting} />
+          </div>
+        </>
+      ) : (
+        <>
+          <SectionTitle more={{ href: "/meeting", label: "例会" }}>例会常用入口</SectionTitle>
+          <MeetingResources tools={tools} limit={4} />
+        </>
+      )}
 
       {/* 常用操作 */}
       <SectionTitle>常用操作</SectionTitle>

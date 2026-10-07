@@ -37,7 +37,7 @@ tools:
     category: meeting
     url: ""
     purpose: 接龙在微信群里完成，不在 EOE Club OS 里重做
-    note: 建议格式：「本周例会 10/10 接龙：1. 名字-角色」。发群前把本周例会链接一起贴上。
+    note: 建议格式：「X月X日例会接龙：1. 名字-角色」。
   - id: speech-assistant
     name: 演讲助手
     category: meeting
@@ -52,7 +52,7 @@ tools:
     tool: 腾讯问卷
     url: ""
     purpose: 每场例会评选最佳备稿演讲 / 最佳即兴 / 最佳评估 / 最佳角色
-    note: 待补充模板链接。每周复制模板，改日期和候选人，再绑定到「本周例会」。
+    note: 待补充模板链接。每次例会复制一份，改日期和候选人。
   - id: vote-theme
     name: 下期主题征集
     category: vote

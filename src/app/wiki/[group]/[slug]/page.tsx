@@ -79,7 +79,6 @@ export default async function WikiPage({ params }: Props) {
                 <Pill>打开 {workbench.title} 工作台 →</Pill>
               </Link>
             )}
-            {entry.updated && <Pill>更新于 {entry.updated}</Pill>}
           </div>
         </header>
 

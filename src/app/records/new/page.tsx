@@ -17,7 +17,7 @@ export default async function NewRecordPage() {
   const used = records.flatMap((r) => r.guestSources.map((g) => g.source));
   const options = [...new Set([...configured, ...used])];
 
-  // 本周例会刚开完（今天或前 3 天内）→ 自动带出日期和主题
+  // 最近一场例会刚开完（今天或前 3 天内）→ 自动带出日期和主题
   const today = todayCN();
   const fresh = /^\d{4}-\d{2}-\d{2}$/.test(meeting.date) && daysBetween(meeting.date, today) >= 0 && daysBetween(meeting.date, today) <= 3;
 

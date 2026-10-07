@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 // 一级栏目只有这些。不要再加（见 docs/PRODUCT.md）。
 const NAV: { href: string; label: string; match: string[]; icon: ReactNode }[] = [
   { href: "/", label: "首页", match: ["/"], icon: <IconHome /> },
-  { href: "/meeting", label: "本周例会", match: ["/meeting"], icon: <IconCalendar /> },
+  { href: "/meeting", label: "例会", match: ["/meeting"], icon: <IconCalendar /> },
   { href: "/wiki", label: "成长百科", match: ["/wiki"], icon: <IconBook /> },
   { href: "/workbench", label: "工作台", match: ["/workbench"], icon: <IconDesk /> },
   { href: "/records", label: "运营", match: ["/records", "/dashboard"], icon: <IconChart /> },

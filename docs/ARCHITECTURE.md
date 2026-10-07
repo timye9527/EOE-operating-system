@@ -8,7 +8,7 @@
 | 语言 | TypeScript | 数据结构清晰，换人 / 换 AI 不容易改坏 |
 | 样式 | Tailwind CSS v4 | 无需单独维护 CSS 文件；设计 token 在 `globals.css` |
 | 内容 | Markdown + YAML（`content/`） | 非程序员也能改；Git 自带版本历史；研究 Agent 直接输出 Markdown |
-| 数据 | Supabase（Postgres）或本地 JSON 文件 | 只有「会后记录」和「本周例会」需要写入；两种都零运维 |
+| 数据 | Supabase（Postgres）或本地 JSON 文件 | 只有「会后记录」和「下一场例会」需要写入；两种都零运维 |
 | 写入 | Server Actions（`src/app/actions.ts`） | 无需单独 API 层 |
 | 图表 | 纯 HTML/CSS | 只有两个简单图，不引图表库 |
 | 字体 | 系统字体 | 国内访问稳定，不依赖 Google Fonts |
@@ -51,7 +51,7 @@ content/*.md, *.yaml ──> src/lib/content.ts, config.ts ──> 页面（Serv
 | note | string? | 备注 |
 | createdAt | ISO 时间 | |
 
-**Meeting（本周例会，只存一条，kv 键 `current_meeting`）**：date、time、theme、location、meetingManager、toastmaster、roles `{role,name}[]`、agendaUrl、docUrl、signupUrl、voteUrl、extraLinks `{label,url,note}[]`、note、updatedAt。
+**Meeting（下一场例会，可选，只存一条，kv 键 `current_meeting`；`getUpcomingMeeting()` 只在日期 ≥ 今天时返回，过期自动不显示）**：date、time、theme、location、meetingManager、toastmaster、roles `{role,name}[]`、agendaUrl、docUrl、signupUrl、voteUrl、extraLinks `{label,url,note}[]`、note、updatedAt。
 
 **Tool（`content/tools.yaml`）**：id、name、category、url、purpose、note、tool（投票工具名）。
 
@@ -73,7 +73,7 @@ Supabase 表结构：[`supabase/schema.sql`](../supabase/schema.sql)。改 `type
 ## 权限与安全
 
 - v0.1 **没有登录**。网站链接只在俱乐部内部分享。
-- 可选的 `EOE_WRITE_CODE`：设置后，写入（新增/删除记录、改本周例会）需要输入俱乐部口令。口令在服务端校验，浏览器只在本机 localStorage 记住用户输入。
+- 可选的 `EOE_WRITE_CODE`：设置后，写入（新增/删除记录、填下一场例会）需要输入俱乐部口令。口令在服务端校验，浏览器只在本机 localStorage 记住用户输入。
 - Supabase 只在服务端用 service role key 访问；表开启 RLS 且没有任何 policy，浏览器端无法直连。
 - 会后记录**不保存嘉宾个人信息**，只有人数和来源。
 - 用户填写的链接只允许 `http(s)://` 或站内 `/路径`，其余自动补 `https://`。

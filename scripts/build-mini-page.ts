@@ -63,8 +63,8 @@ function rehypeMini() {
           : el("button", { type: "button", className: ["ref"], dataRef: id }, [text(id)]);
       }
       if (k.includes("cred-eoe")) {
-        const date = String(p.dataDate ?? "");
-        return el("span", { className: ["eoe"] }, [text("✓ EOE 已确认"), ...(date ? [el("i", {}, [text(date)])] : [])]);
+        // 不显示确认日期（同网站）
+        return el("span", { className: ["eoe"] }, [text("✓ EOE 已确认")]);
       }
       if (k.includes("cred-todo")) {
         const msg = (c.children?.[0]?.value ?? "").trim();
