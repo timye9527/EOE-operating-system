@@ -18,7 +18,7 @@ export type WikiRemarkOptions = {
 };
 
 const TOKEN_RE =
-  /【EOE 已确认\s*(\d{4}-\d{2}-\d{2})?\s*】|（EOE 已确认）|（推论[^）]*）|\[([A-Z]{1,3}\d{1,2})\]|content\/((?:officers|roles)\/[a-z0-9-]+|handover|eoe-context)\.md/g;
+  /【EOE 已确认([^】]*)】|（EOE 已确认）|（推论[^）]*）|\[([A-Z]{1,3}\d{1,2})\]|content\/((?:officers|roles)\/[a-z0-9-]+|handover|eoe-context)\.md/g;
 
 const span = (className: string, children: Node[], props: Record<string, unknown> = {}): Node => ({
   type: "emphasis",
@@ -72,7 +72,7 @@ export function remarkEoeWiki(opts: WikiRemarkOptions) {
       if (all.startsWith("（推论") && !allowInference) continue;
       if (at > last) out.push(text(value.slice(last, at)));
       if (all.startsWith("【EOE") || all === "（EOE 已确认）") {
-        out.push(span("cred-eoe", [text(all)], { dataDate: date ?? "" }));
+        out.push(span("cred-eoe", [text(all)], { dataDate: (date ?? "").replace(/^[\s：:，,]+/, "").trim() }));
       } else if (all.startsWith("（推论")) {
         const inner = all.slice(1, -1); // 推论，结合 [V2] …
         out.push(

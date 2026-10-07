@@ -79,7 +79,7 @@ export default async function Home() {
           >
             <span className="text-xl">{r.emoji}</span>
             <p className="mt-1 truncate text-sm font-bold">{r.title}</p>
-            <p className="truncate text-xs text-ink-3">{r.nameZh}</p>
+            {r.nameZh !== r.title && <p className="truncate text-xs text-ink-3">{r.nameZh}</p>}
           </Link>
         ))}
       </div>

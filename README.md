@@ -16,10 +16,10 @@ EOE Club OS
 ```
 
 <p>
-<img src="docs/screenshots/home.png" width="200" alt="首页">
-<img src="docs/screenshots/wiki-levels.png" width="200" alt="成长百科 60/80/90">
-<img src="docs/screenshots/record-form.png" width="200" alt="会后 1 分钟记录">
-<img src="docs/screenshots/dashboard.png" width="200" alt="运营看板">
+<img src="docs/screenshots/home.png" width="190" alt="首页">
+<img src="docs/screenshots/wiki-role.png" width="190" alt="成长百科：角色页">
+<img src="docs/screenshots/wiki-first.png" width="190" alt="如果你明天第一次做（可勾选）">
+<img src="docs/screenshots/wiki-source.png" width="190" alt="点开来源编号">
 </p>
 
 当前版本：**v0.1**（见 [docs/ROADMAP.md](docs/ROADMAP.md)）
@@ -55,7 +55,7 @@ npm run dev          # 打开 http://localhost:3000
 | 想改什么 | 改哪里 |
 |---|---|
 | 成长百科：某个角色的指南（VPE、主持人…） | `docs/eoe-growth-wiki/content/officers/*.md`、`.../roles/*.md` |
-| 成长百科：新增一个角色 | 往上面两个目录之一放一个 `.md`，按现有角色的 0–9 节结构写，**不用改代码** |
+| 成长百科：新增一个角色 | 往上面两个目录之一放一个 `.md`，按现有角色的 0–9 节结构写，文件名用英文小写和短横线（如 `meeting-manager.md`），**不用改代码** |
 | 成长百科：EOE 现状 / 官员交接 / 资料来源 | `docs/eoe-growth-wiki/content/eoe-context.md`、`handover.md`、`research/SOURCES.md` |
 | 成长百科卡片的图标和排序（可选） | `content/wiki-display.yaml` |
 | 官员工作台 | `content/workbench/*.yaml` |

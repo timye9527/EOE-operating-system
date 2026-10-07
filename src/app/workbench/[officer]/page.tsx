@@ -84,15 +84,16 @@ export default async function WorkbenchPage({ params }: Props) {
               ))}
             </section>
           )}
-          <HandoverBanner compact />
         </div>
       )}
 
-      {wiki && (
-        <p className="mb-2 text-xs text-ink-3">
-          下面是工作台的通用提醒（v0.1 草稿），不是 EOE 已确认的规则。
-        </p>
-      )}
+      <div className="mb-6">
+        <HandoverBanner compact />
+      </div>
+
+      <p className="mb-2 text-xs text-ink-3">
+        下面是工作台的通用提醒（v0.1 草稿），不是 EOE 已确认的规则{wiki ? "" : "；这个角色的成长百科页面还没写"}。
+      </p>
       <div className="space-y-3">
         {w.blocks.map((b, i) => (
           <section key={i} className="card p-4">

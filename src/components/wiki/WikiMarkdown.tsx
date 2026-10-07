@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkCjkFriendly from "remark-cjk-friendly";
 import { remarkEoeWiki, type WikiRemarkOptions } from "@/lib/wiki-remark";
 import { SourceRef } from "./SourceSheet";
 import { TaskItem } from "./TaskItem";
@@ -60,7 +61,12 @@ export function WikiMarkdown({ md, ctx, invert }: { md: string; ctx: WikiRemarkO
   if (!md.trim()) return null;
   return (
     <div className={invert ? "prose-eoe prose-invert" : "prose-eoe"}>
-      <ReactMarkdown remarkPlugins={[remarkGfm, [remarkEoeWiki, ctx]]} components={components} skipHtml>
+      <ReactMarkdown
+        // cjk-friendly：让「**即兴主持（Topicsmaster）**的」这类紧挨中文标点的粗体也能生效
+        remarkPlugins={[remarkGfm, remarkCjkFriendly, [remarkEoeWiki, ctx]]}
+        components={components}
+        skipHtml
+      >
         {md}
       </ReactMarkdown>
     </div>

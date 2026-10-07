@@ -25,7 +25,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { group, slug } = await params;
   const entry = await getWiki(group, slug);
-  return { title: entry ? `${entry.nameZh} ${entry.title}` : "成长百科" };
+  if (!entry) return { title: "成长百科" };
+  return { title: entry.nameZh === entry.title ? entry.title : `${entry.nameZh} ${entry.title}` };
 }
 
 export default async function WikiPage({ params }: Props) {
@@ -55,7 +56,8 @@ export default async function WikiPage({ params }: Props) {
             </span>
             <div className="min-w-0">
               <h1 className="text-2xl font-black tracking-tight">
-                {entry.nameZh} <span className="text-ink-2">{entry.title !== entry.nameZh && entry.title}</span>
+                {entry.nameZh}
+                {entry.title !== entry.nameZh && <span className="text-ink-2"> {entry.title}</span>}
               </h1>
               {entry.subtitle && <p className="truncate text-sm text-ink-3">{entry.subtitle}</p>}
             </div>

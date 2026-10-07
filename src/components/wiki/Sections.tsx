@@ -9,12 +9,16 @@ import { WikiMarkdown } from "./WikiMarkdown";
 type Kind = "eoe" | "levels" | "stories" | "first" | "practice" | "plain";
 
 export function sectionKind(s: WikiSection): Kind {
+  // 有编号的节（角色页）只按编号判断，避免「会前清单」这类标题被误认成第 8 节
+  if (s.num !== null) {
+    const byNum: Partial<Record<number, Kind>> = { 0: "eoe", 5: "levels", 6: "stories", 8: "first", 9: "practice" };
+    return byNum[s.num] ?? "plain";
+  }
+  // 没编号的节（交接指南、EOE 现状）按标题判断
   const t = s.label;
-  if (s.num === 0 || (t.includes("EOE") && t.includes("已确认"))) return "eoe";
-  if (s.num === 5 || /60\s*\/\s*80\s*\/\s*90/.test(t)) return "levels";
-  if (s.num === 6 || t.includes("前人")) return "stories";
-  if (s.num === 8 || t.includes("第一次做") || t.includes("清单")) return "first";
-  if (s.num === 9 || t.includes("实践做法")) return "practice";
+  if (t.includes("EOE") && t.includes("已确认")) return "eoe";
+  if (/60\s*\/\s*80\s*\/\s*90/.test(t)) return "levels";
+  if (t.includes("第一次做") || t.includes("清单")) return "first";
   return "plain";
 }
 

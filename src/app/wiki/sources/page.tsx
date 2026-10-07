@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getSources } from "@/lib/sources";
 import { existingWikiFiles } from "@/lib/content";
 import { WikiMarkdown } from "@/components/wiki/WikiMarkdown";
+import { InlineMd } from "@/components/wiki/InlineMd";
 import type { WikiRemarkOptions } from "@/lib/wiki-remark";
 
 export const metadata: Metadata = { title: "资料来源总表" };
@@ -49,7 +50,7 @@ export default async function SourcesPage() {
             )}
             <div className="space-y-2.5">
               {c.sources.map((s) => (
-                <div key={s.id} id={`src-${s.id}`} className="card scroll-mt-28 p-4 target:ring-2 target:ring-brand">
+                <div key={s.id} id={`src-${s.id}`} className="card p-4 target:ring-2 target:ring-brand">
                   <div className="flex flex-wrap items-center gap-1.5 text-xs">
                     <span className="rounded-md bg-sky px-1.5 py-0.5 font-bold text-sky-ink">{s.id}</span>
                     {s.tag && <span className="text-ink-3">{s.tag}</span>}
@@ -65,14 +66,20 @@ export default async function SourcesPage() {
                   <p className="mt-1.5 font-bold leading-snug">
                     {s.url ? (
                       <a href={s.url} target="_blank" rel="noreferrer" className="hover:text-brand-ink">
-                        {s.title} <span className="text-ink-3">↗</span>
+                        <InlineMd text={s.title} /> <span className="text-ink-3">↗</span>
                       </a>
                     ) : (
-                      s.title
+                      <InlineMd text={s.title} />
                     )}
                   </p>
-                  <p className="mt-0.5 text-sm text-ink-2">{[s.author, s.origin].filter(Boolean).join(" · ")}</p>
-                  {s.use && <p className="mt-0.5 text-xs text-ink-3">用途：{s.use}</p>}
+                  <p className="mt-0.5 text-sm text-ink-2">
+                    <InlineMd text={[s.author, s.origin].filter(Boolean).join(" · ")} />
+                  </p>
+                  {s.use && (
+                    <p className="mt-0.5 text-xs text-ink-3">
+                      用途：<InlineMd text={s.use} />
+                    </p>
+                  )}
                   {s.noteLines.length > 0 && (
                     <div className="mt-2 rounded-2xl bg-bg p-3 text-sm">
                       <WikiMarkdown md={s.noteLines.join("\n\n")} ctx={ctx} />

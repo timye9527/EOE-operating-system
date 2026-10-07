@@ -200,7 +200,8 @@ body {
 .prose-invert .cred-ref { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.35); color: #fff; }
 .prose-invert .cred-ref-summary { background: transparent; }
 .prose-invert .cred-inf { color: rgba(255, 255, 255, 0.8); }
-.prose-invert .cred-eoe { background: #2bb39f; }
+/* 深色卡片上用浅绿底 + 深绿字，对比度 ≥ 4.5:1 */
+.prose-invert .cred-eoe { background: var(--mint); color: var(--mint-ink); }
 .prose-invert .eoe-line { background: rgba(43, 179, 159, 0.18); }
 
 /* 隐藏横向滚动条但保留滚动 */

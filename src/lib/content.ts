@@ -60,6 +60,9 @@ export type WikiDoc = {
 
 const CONFIRMED_RE = /【EOE 已确认[^】]*】|（EOE 已确认）/g;
 
+/** 文件名规则：英文小写、数字、短横线，如 meeting-manager.md（网址就是它，必须全站一致） */
+const FILE_RE = /^[a-z0-9-]+\.md$/;
+
 export function countConfirmed(md: string) {
   return (md.match(CONFIRMED_RE) ?? []).length;
 }
@@ -173,7 +176,8 @@ async function loadEntry(group: WikiGroup, file: string, display: Display): Prom
   const raw = await fs.readFile(path.join(WIKI_CONTENT, group, file), "utf8");
   const { data, content } = matter(raw);
   const doc = splitDoc(content);
-  const parsed = parseHeading(doc.heading || slug);
+  // frontmatter 的 title 通常是完整标题（「计时官 Timer」），和一级标题一样拆成中文名 / 英文名
+  const parsed = parseHeading(str(data.title) ?? (doc.heading || slug));
   const oneLiner = doc.sections.find((s) => s.num === 1 || s.label.includes("一句话"));
   const firstPara = oneLiner?.intro.split(/\n\s*\n/)[0] ?? "";
   const disp = display[group]?.[slug] ?? {};
@@ -183,9 +187,9 @@ async function loadEntry(group: WikiGroup, file: string, display: Display): Prom
     slug,
     file: `${group}/${file}`,
     heading: doc.heading || slug,
-    title: str(data.title_en ?? data.name_en ?? data.title) ?? parsed.title,
+    title: str(data.title_en ?? data.name_en) ?? parsed.title,
     nameZh: str(data.title_zh ?? data.name_zh ?? data.zh) ?? parsed.nameZh,
-    subtitle: str(data.subtitle ?? data.full_name) ?? parsed.subtitle,
+    subtitle: str(data.subtitle ?? data.full_name) ?? parsed.subtitle ?? parseHeading(doc.heading || slug).subtitle,
     summary: str(data.summary ?? data.one_liner) ?? plain(firstPara),
     emoji: str(data.emoji) ?? disp.emoji ?? "📘",
     order: Number(data.order ?? disp.order ?? 999),
@@ -196,10 +200,21 @@ async function loadEntry(group: WikiGroup, file: string, display: Display): Prom
   };
 }
 
+/** 不符合文件名规则、因此没有显示的 .md（成长百科首页会提示，免得新文件「消失」了没人发现） */
+export async function skippedWikiFiles(): Promise<string[]> {
+  const out: string[] = [];
+  for (const g of Object.keys(WIKI_GROUPS)) {
+    for (const f of await readDirSafe(path.join(WIKI_CONTENT, g))) {
+      if (f.endsWith(".md") && !FILE_RE.test(f) && !f.startsWith("_") && f.toLowerCase() !== "readme.md") {
+        out.push(`${g}/${f}`);
+      }
+    }
+  }
+  return out;
+}
+
 export async function listWiki(group: WikiGroup): Promise<WikiEntry[]> {
-  const files = (await readDirSafe(path.join(WIKI_CONTENT, group))).filter(
-    (f) => f.endsWith(".md") && !f.startsWith("_") && f.toLowerCase() !== "readme.md",
-  );
+  const files = (await readDirSafe(path.join(WIKI_CONTENT, group))).filter((f) => FILE_RE.test(f));
   const display = await loadDisplay();
   const entries = await Promise.all(files.map((f) => loadEntry(group, f, display)));
   return entries.sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
@@ -234,7 +249,7 @@ export async function getWikiDoc(slug: "eoe-context" | "handover"): Promise<Wiki
 export async function existingWikiFiles(): Promise<string[]> {
   const out: string[] = [];
   for (const g of Object.keys(WIKI_GROUPS)) {
-    for (const f of await readDirSafe(path.join(WIKI_CONTENT, g))) if (f.endsWith(".md")) out.push(`${g}/${f}`);
+    for (const f of await readDirSafe(path.join(WIKI_CONTENT, g))) if (FILE_RE.test(f)) out.push(`${g}/${f}`);
   }
   for (const f of ["eoe-context.md", "handover.md"]) {
     if ((await readDirSafe(WIKI_CONTENT)).includes(f)) out.push(f);

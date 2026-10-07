@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getWikiDoc, listWiki, WIKI_GROUPS, type WikiGroup } from "@/lib/content";
+import { getWikiDoc, listWiki, skippedWikiFiles, WIKI_GROUPS, type WikiGroup } from "@/lib/content";
 import { getSources } from "@/lib/sources";
 import { WikiCard } from "@/components/WikiCard";
 import { CredLegend } from "@/components/wiki/CredLegend";
@@ -10,10 +10,11 @@ import { PageHeader } from "@/components/ui";
 export const metadata: Metadata = { title: "成长百科" };
 
 export default async function WikiIndex() {
-  const [groups, context, sources] = await Promise.all([
+  const [groups, context, sources, skipped] = await Promise.all([
     Promise.all((Object.keys(WIKI_GROUPS) as WikiGroup[]).map(async (g) => [g, await listWiki(g)] as const)),
     getWikiDoc("eoe-context"),
     getSources(),
+    skippedWikiFiles(),
   ]);
   const sourceCount = Object.keys(sources.byId).length;
 
@@ -62,9 +63,19 @@ export default async function WikiIndex() {
           📚 资料来源总表（{sourceCount} 条）
         </Link>
       </p>
+      {skipped.length > 0 && (
+        <p className="mt-4 rounded-2xl bg-sun px-4 py-3 text-sm text-sun-ink">
+          这些文件没有显示，因为文件名要用英文小写和短横线（如 <code>meeting-manager.md</code>）：
+          {skipped.map((f) => (
+            <code key={f} className="ml-1">
+              {f}
+            </code>
+          ))}
+        </p>
+      )}
       <p className="mt-3 text-center text-xs text-ink-3">
-        内容来自 <code>docs/eoe-growth-wiki/</code>。新增角色：往 <code>content/officers</code> 或{" "}
-        <code>content/roles</code> 放一个 .md 文件即可。
+        内容来自 <code>docs/eoe-growth-wiki/</code>。新增角色：往 <code>docs/eoe-growth-wiki/content/officers/</code> 或{" "}
+        <code>.../roles/</code> 放一个 .md 文件即可（文件名用英文小写和短横线）。
       </p>
     </>
   );

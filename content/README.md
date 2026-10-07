@@ -12,7 +12,7 @@
 
 **成长百科不在这里**，在 [`docs/eoe-growth-wiki/`](../docs/eoe-growth-wiki/)：
 
-- 新增角色：往 `docs/eoe-growth-wiki/content/officers/` 或 `.../roles/` 放一个 `.md`，按现有角色的 0–9 节结构写，自动出现在网站上。
+- 新增角色：往 `docs/eoe-growth-wiki/content/officers/` 或 `.../roles/` 放一个 `.md`，按现有角色的 0–9 节结构写，文件名用英文小写和短横线（如 `meeting-manager.md`），自动出现在网站上。
 - EOE 现状：`content/eoe-context.md`；官员交接：`content/handover.md`；资料来源：`research/SOURCES.md`。
 
 原则：没有真实信息就留空 / 写「待补充」，不要放假的示例数据。

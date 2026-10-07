@@ -29,6 +29,7 @@ blocks:
     type: links
     items:
       - { label: 运营看板, url: /dashboard }
+      - { label: 官员交接指南, url: /wiki/handover, note: 成长百科 · 附交接清单 }
       - { label: 官员交接文档, url: "", note: 待补充 }
   - title: 外部工具
     type: tools

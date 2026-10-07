@@ -126,6 +126,11 @@ tools:
     url: ""
     purpose: 历史会单、照片、官员交接资料
     note: 待补充
+  - id: handover-guide
+    name: 官员交接指南
+    category: club
+    url: /wiki/handover
+    purpose: 成长百科里的交接经验 + 可勾选的交接清单
   - id: handover
     name: 官员交接文档
     category: club
