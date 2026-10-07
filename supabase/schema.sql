@@ -19,7 +19,7 @@ create table if not exists meeting_records (
 
 create index if not exists meeting_records_date_idx on meeting_records (date desc);
 
--- 简单键值存储：目前只有 current_meeting（本周例会）
+-- 简单键值存储：只有 current_meeting（下一场例会，可选，日期过了自动隐藏）
 create table if not exists kv (
   key        text primary key,
   value      jsonb not null,

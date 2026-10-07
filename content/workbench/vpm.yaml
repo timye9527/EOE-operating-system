@@ -20,7 +20,7 @@ blocks:
   - title: 嘉宾记录
     type: text
     text: |
-      v0.1 只统计嘉宾**人数和来源**，不记录个人信息（避免把 EOE Club OS 做成 CRM）。
+      这里只统计嘉宾**人数和来源**，不记录个人信息（避免把 EOE Club OS 做成 CRM）。
       需要跟进具体嘉宾时，用微信备注或腾讯文档即可。 → [写会后记录](/records/new) · [查看所有记录](/records)
 
   - title: 跟进事项（每周）

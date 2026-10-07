@@ -12,7 +12,8 @@ export const metadata: Metadata = { title: "例会" };
 function matchGuide(role: string, entries: WikiEntry[]) {
   const r = role.toLowerCase();
   return entries
-    .filter((e) => r.includes(e.title.toLowerCase()) || (e.nameZh && role.includes(e.nameZh)))
+    // 中文名只匹配开头：「即兴主持人」不该连到「主持人」
+    .filter((e) => r.includes(e.title.toLowerCase()) || (e.nameZh && role.trim().startsWith(e.nameZh)))
     .sort((a, b) => b.title.length - a.title.length)[0];
 }
 

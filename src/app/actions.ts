@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getStore, storeMode } from "@/lib/store";
+import { daysBetween, todayCN } from "@/lib/date";
 import type { GuestSourceCount, LinkItem, Meeting, RoleAssignment } from "@/lib/types";
 
 // 所有写操作都在这里。只有三种写入：新增/删除会后记录、保存下一场例会（可选）。
@@ -115,8 +116,12 @@ export async function saveMeeting(_prev: ActionState, form: FormData): Promise<A
   const denied = checkWriteCode(form);
   if (denied) return { ok: false, error: denied };
 
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(text(form.get("date"), 10))) {
+  const meetingDate = text(form.get("date"), 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(meetingDate)) {
     return { ok: false, error: "请选择例会日期（日期过了，这场的信息会自动隐藏）" };
+  }
+  if (daysBetween(todayCN(), meetingDate) < 0) {
+    return { ok: false, error: "这个日期已经过了，保存后不会显示。请选今天或以后的日期。" };
   }
 
   const meeting: Meeting = {

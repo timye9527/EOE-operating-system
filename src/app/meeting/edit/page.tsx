@@ -1,14 +1,17 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getTools } from "@/lib/config";
-import { getCurrentMeeting } from "@/lib/meeting";
+import { getMeetingSeed, getTools } from "@/lib/config";
+import { getUpcomingMeeting } from "@/lib/meeting";
+import { todayCN } from "@/lib/date";
 import { MeetingForm } from "@/components/MeetingForm";
 import { PageHeader } from "@/components/ui";
 
 export const metadata: Metadata = { title: "填写下一场例会" };
 
 export default async function EditMeetingPage() {
-  const [meeting, { tools }] = await Promise.all([getCurrentMeeting(), getTools()]);
+  // 只预填还没过期的那一场；过期的不带出来（否则旧主题、旧角色会被当成新的保存）
+  const [upcoming, seed, { tools }] = await Promise.all([getUpcomingMeeting(), getMeetingSeed(), getTools()]);
+  const meeting = upcoming ?? { ...seed, date: "" };
   return (
     <>
       <PageHeader
@@ -26,6 +29,7 @@ export default async function EditMeetingPage() {
           meeting={meeting}
           voteTemplates={tools.filter((t) => t.category === "vote")}
           writeCodeRequired={!!process.env.EOE_WRITE_CODE}
+          minDate={todayCN()}
         />
       </div>
     </>

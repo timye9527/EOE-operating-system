@@ -197,5 +197,5 @@
 | franticallyspeaking.com、jdmspeakers.com 的 GE 文章 | 偏 SEO 型通用介绍，缺少作者真实经历 |
 | limunt.com「Toastmaster tips」 | 讲的是婚礼司仪，不是 Toastmasters 会议 |
 | Reddit r/Toastmasters | 只取到版块列表页，没取到具体讨论串正文，不能作为来源 |
-| 知乎「如何做好即兴演讲主持人」https://zhuanlan.zhihu.com/p/125057653 | 与已收录的角色无直接关系 |
+| 知乎「如何做好即兴演讲主持人」https://zhuanlan.zhihu.com/p/125057653 | 主题是即兴主持（属于会议经理的职责），整理时未采用；可作补充阅读 |
 | 博客园「Toastmasters」https://www.cnblogs.com/lvye1221/p/17317396.html | 中文 VPE 职责整理，个人笔记性质，经验成分少，仅作参考 |

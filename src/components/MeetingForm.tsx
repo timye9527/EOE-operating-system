@@ -11,10 +11,12 @@ export function MeetingForm({
   meeting: m,
   voteTemplates,
   writeCodeRequired,
+  minDate,
 }: {
   meeting: Meeting;
   voteTemplates: Tool[];
   writeCodeRequired: boolean;
+  minDate: string;
 }) {
   const [state, action, pending] = useActionState<ActionState, FormData>(saveMeeting, { ok: true });
   const [, startTransition] = useTransition();
@@ -25,7 +27,7 @@ export function MeetingForm({
     <form onSubmit={submitWith(action, startTransition)} className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <Field label="日期" hint="过了就自动隐藏">
-          <input name="date" type="date" required defaultValue={m.date} className={inputCls} />
+          <input name="date" type="date" required min={minDate} defaultValue={m.date} className={inputCls} />
         </Field>
         <Field label="时间">
           <input name="time" defaultValue={m.time} placeholder="19:30 - 21:30" className={inputCls} />

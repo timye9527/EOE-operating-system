@@ -17,12 +17,12 @@ EOE Club OS
 
 <p>
 <img src="docs/screenshots/home.png" width="190" alt="首页">
-<img src="docs/screenshots/wiki-role.png" width="190" alt="成长百科：角色页">
+<img src="docs/screenshots/meeting.png" width="190" alt="例会：长期有效的入口">
 <img src="docs/screenshots/wiki-first.png" width="190" alt="如果你明天第一次做（可勾选）">
 <img src="docs/screenshots/wiki-source.png" width="190" alt="点开来源编号">
 </p>
 
-当前版本：**v0.1**（见 [docs/ROADMAP.md](docs/ROADMAP.md)）
+路线图见 [docs/ROADMAP.md](docs/ROADMAP.md)。
 
 ---
 
@@ -66,7 +66,7 @@ npm run dev          # 打开 http://localhost:3000
 改完 → 提交到 GitHub → 重新部署即上线。可以直接在 GitHub 网页上编辑 Markdown。
 
 成长百科的写作规则见 `docs/eoe-growth-wiki/` 里的说明（接入方案：[docs/plan-growth-wiki.md](docs/plan-growth-wiki.md)）。系统只负责显示，**不会改写正文**：
-`【EOE 已确认 日期】` 显示成绿色徽章，`[V1]` 显示成可点开的来源标签，`（推论…）` 显示成推论标签，`- [ ]` 变成可勾选清单（勾选状态存在本机）。
+`【EOE 已确认】` 显示成绿色徽章（不要写日期，写了也不显示），`[V1]` 显示成可点开的来源标签，`（推论…）` 显示成推论标签，`- [ ]` 变成可勾选清单（勾选状态存在本机）。
 
 **下一场例会**（可选）和**会后记录**是在网站上直接填写的（存数据库）。下一场例会的日期一过就自动隐藏，不用回来删。
 
