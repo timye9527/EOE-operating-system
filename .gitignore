@@ -43,3 +43,6 @@ next-env.d.ts
 
 # EOE Club OS 本地数据（不提交，真实运营数据在 Supabase 或本机）
 /data/*.json
+
+# 手机单页（npm run build:mini 生成，可随时重建）
+/dist-mini/

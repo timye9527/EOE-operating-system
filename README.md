@@ -47,6 +47,7 @@ npm run dev          # 打开 http://localhost:3000
 | `npm run build` | 生产构建（同时做 TypeScript 检查） |
 | `npm run start` | 运行生产构建 |
 | `npm run lint` | ESLint |
+| `npm run build:mini` | 生成成长百科手机单页 `dist-mini/eoe-growth-wiki.html`（小程序风格，单个 HTML 文件，可发布成链接给手机打开） |
 
 ## 2. 改内容（不需要写代码）
 

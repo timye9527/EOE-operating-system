@@ -1,33 +1,14 @@
 import type { WikiSection } from "@/lib/content";
 import type { WikiRemarkOptions } from "@/lib/wiki-remark";
 import { WikiMarkdown } from "./WikiMarkdown";
+import { isConfirmedTitle, isOptionalTitle, navLabel, sectionKind, type SectionKind } from "@/lib/wiki-kinds";
 
 // 成长百科各节的展示方式。结构来自 Markdown 本身（## N. 标题 / ### 小标题），
 // 这里只决定样式：第 0 节和 9.2 是 EOE 已确认（绿）、第 5 节是 60/80/90 阶梯、
 // 第 6 节是前人经验卡片、第 8 节是可勾选的「明天第一次做」。
 
-type Kind = "eoe" | "levels" | "stories" | "first" | "practice" | "plain";
-
-export function sectionKind(s: WikiSection): Kind {
-  // 有编号的节（角色页）只按编号判断，避免「会前清单」这类标题被误认成第 8 节
-  if (s.num !== null) {
-    const byNum: Partial<Record<number, Kind>> = { 0: "eoe", 5: "levels", 6: "stories", 8: "first", 9: "practice" };
-    return byNum[s.num] ?? "plain";
-  }
-  // 没编号的节（交接指南、EOE 现状）按标题判断
-  const t = s.label;
-  if (t.includes("EOE") && t.includes("已确认")) return "eoe";
-  if (/60\s*\/\s*80\s*\/\s*90/.test(t)) return "levels";
-  if (t.includes("第一次做") || t.includes("清单")) return "first";
-  return "plain";
-}
-
-/** 章节跳转条上的短标签 */
-export function navLabel(s: WikiSection) {
-  const short: Partial<Record<Kind, string>> = { levels: "60/80/90", first: "明天第一次做" };
-  const label = short[sectionKind(s)] ?? s.label.replace(/（.*?）|\(.*?\)/g, "");
-  return s.num !== null ? `${s.num} ${label}` : label;
-}
+type Kind = SectionKind;
+export { sectionKind, navLabel };
 
 const LEVEL = {
   60: { cls: "bg-sky text-sky-ink", bar: "bg-sky-ink/70 w-3/5" },
@@ -99,8 +80,8 @@ function Subsection({ kind, title, body, ctx }: { kind: Kind; title: string; bod
     );
   }
 
-  const confirmed = title.includes("EOE") && title.includes("已确认");
-  const optional = title.includes("补充") && title.includes("可选");
+  const confirmed = isConfirmedTitle(title);
+  const optional = isOptionalTitle(title);
   const cls = confirmed
     ? "rounded-2xl border border-mint-ink/20 bg-mint p-3.5"
     : optional
