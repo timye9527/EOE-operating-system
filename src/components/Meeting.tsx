@@ -6,6 +6,8 @@ import { formatDate, LinkTile } from "@/components/ui";
 //   MeetingHero / MeetingLinks —— 可选填写的「下一场例会」，日期过了自动隐藏
 
 export function MeetingHero({ m, compact }: { m: Meeting; compact?: boolean }) {
+  // 空缺早暴露：填了角色、但名字空着的，就是还没人认领
+  const open = m.roles.filter((r) => !r.name.trim()).length;
   return (
     <div className="relative overflow-hidden rounded-3xl bg-ink p-5 text-white">
       <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand/80 blur-2xl" />
@@ -27,6 +29,11 @@ export function MeetingHero({ m, compact }: { m: Meeting; compact?: boolean }) {
               <p className="font-semibold">{m.toastmaster || "—"}</p>
             </div>
           </div>
+        )}
+        {open > 0 && (
+          <p className="mt-3 inline-block rounded-full bg-brand-soft px-3 py-1 text-xs font-semibold text-brand-ink">
+            🙋 还缺 {open} 个角色，求认领
+          </p>
         )}
       </div>
     </div>

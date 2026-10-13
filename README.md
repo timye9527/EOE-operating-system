@@ -22,7 +22,7 @@ EOE Club OS
 <img src="docs/screenshots/wiki-source.png" width="190" alt="点开来源编号">
 </p>
 
-路线图见 [docs/ROADMAP.md](docs/ROADMAP.md)。
+路线图见 [docs/ROADMAP.md](docs/ROADMAP.md)。俱乐部为什么会垮、和独立项目「例会台」怎么分工，见 [docs/BACKGROUND.md](docs/BACKGROUND.md)。
 
 ---
 
