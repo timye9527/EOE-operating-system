@@ -63,8 +63,16 @@ const TONES = ["brand", "sky", "mint", "grape", "sun"] as const;
 const EMOJI: Record<string, string> = { meeting: "📝", vote: "🗳️" };
 
 /** 每次例会都用得上的入口：tools.yaml 里「例会协作」和「投票模板」两类 */
-export function MeetingResources({ tools, limit }: { tools: Tool[]; limit?: number }) {
-  const list = tools.filter((t) => t.category === "meeting" || t.category === "vote");
+export function MeetingResources({
+  tools,
+  limit,
+  only,
+}: {
+  tools: Tool[];
+  limit?: number;
+  only?: "meeting" | "vote";
+}) {
+  const list = tools.filter((t) => (only ? t.category === only : t.category === "meeting" || t.category === "vote"));
   const shown = limit ? list.slice(0, limit) : list;
   return (
     <div className="grid grid-cols-2 gap-2 md:grid-cols-4">

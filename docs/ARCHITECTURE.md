@@ -48,6 +48,7 @@ content/*.md, *.yaml ──> src/lib/content.ts, config.ts ──> 页面（Serv
 | preparedSpeeches | number | 备稿数量 |
 | winners | string | 获奖者（自由文本） |
 | reflection | string | 一句话复盘 |
+| roles | `{role,name}[]?` | 当场角色名单：写记录时若「下一场例会」是同一天，自动带入（不用再填） |
 | note | string? | 备注 |
 | createdAt | ISO 时间 | |
 

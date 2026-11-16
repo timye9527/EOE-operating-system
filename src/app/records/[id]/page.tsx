@@ -62,6 +62,19 @@ export default async function RecordDetail({ params }: PageProps<"/records/[id]"
             <p className="text-sm text-ink-2">{r.reflection}</p>
           </div>
         )}
+        {r.roles && r.roles.length > 0 && (
+          <div>
+            <p className="mb-1.5 text-sm font-semibold">🎭 当场角色</p>
+            <div className="divide-y divide-line rounded-2xl bg-bg px-3">
+              {r.roles.map((x, i) => (
+                <div key={i} className="flex justify-between gap-3 py-2 text-sm">
+                  <span className="text-ink-2">{x.role}</span>
+                  <span className="font-semibold">{x.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         {r.note && (
           <div>
             <p className="text-sm font-semibold">备注</p>

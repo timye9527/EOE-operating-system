@@ -4,7 +4,8 @@ import { getUpcomingMeeting } from "@/lib/meeting";
 import { getTools } from "@/lib/config";
 import { listAllWiki, type WikiEntry } from "@/lib/content";
 import { MeetingHero, MeetingLinks, MeetingResources } from "@/components/Meeting";
-import { LinkTile, PageHeader, SectionTitle } from "@/components/ui";
+import { formatDate, LinkTile, PageHeader, SectionTitle } from "@/components/ui";
+import { getStore } from "@/lib/store";
 
 export const metadata: Metadata = { title: "例会" };
 
@@ -20,15 +21,16 @@ function matchGuide(role: string, entries: WikiEntry[]) {
 // 例会：长期有效的入口在前；「下一场例会」可选填写，日期过了自动隐藏，不需要每周维护。
 export default async function MeetingPage({ searchParams }: PageProps<"/meeting">) {
   const { saved } = await searchParams;
-  const [m, { tools }, wiki] = await Promise.all([getUpcomingMeeting(), getTools(), listAllWiki()]);
+  const [m, { tools }, wiki, store] = await Promise.all([getUpcomingMeeting(), getTools(), listAllWiki(), getStore()]);
+  const recent = (await store.listRecords()).slice(0, 3);
   const roles = wiki.filter((e) => e.group === "roles");
 
   return (
     <>
       <PageHeader
         eyebrow="例会"
-        title="每次例会都用得上"
-        desc="下面的入口长期有效。下一场例会的信息可以不填；填了的话，日期一过会自动隐藏。"
+        title="会前 · 会中 · 会后"
+        desc="入口长期有效。下一场例会可以不填，填了日期一过自动隐藏。"
         action={
           <Link href="/meeting/edit" className="rounded-full border border-line bg-white px-3.5 py-1.5 text-sm">
             ✏️ 填下一场
@@ -41,31 +43,7 @@ export default async function MeetingPage({ searchParams }: PageProps<"/meeting"
         </p>
       )}
 
-      <SectionTitle>常用入口</SectionTitle>
-      <MeetingResources tools={tools} />
-      <div className="mt-2 grid grid-cols-2 gap-2 md:grid-cols-4">
-        <LinkTile label="会后记录" url="/records/new" sub="1 分钟完成" emoji="✍️" />
-        <LinkTile label="全部工具" url="/tools" sub="工具箱" emoji="🧰" />
-      </div>
-
-      {roles.length > 0 && (
-        <>
-          <SectionTitle more={{ href: "/wiki", label: "成长百科" }}>角色指南 · 明天第一次做</SectionTitle>
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-            {roles.map((r) => (
-              <LinkTile
-                key={r.file}
-                label={r.nameZh !== r.title ? `${r.nameZh} ${r.title}` : r.title}
-                url={`/wiki/${r.group}/${r.slug}#s8`}
-                sub="第一次做要记住什么"
-                emoji={r.emoji}
-              />
-            ))}
-          </div>
-        </>
-      )}
-
-      <SectionTitle>下一场例会</SectionTitle>
+      <SectionTitle>① 会前</SectionTitle>
       {m ? (
         <div className="space-y-2.5">
           <MeetingHero m={m} />
@@ -101,6 +79,45 @@ export default async function MeetingPage({ searchParams }: PageProps<"/meeting"
           <Link href="/meeting/edit" className="mt-2 block text-brand-ink">
             需要的话，填一下 →
           </Link>
+        </div>
+      )}
+      <p className="mb-2 mt-4 text-xs font-semibold text-ink-3">接龙 · 总表</p>
+      <MeetingResources tools={tools} only="meeting" />
+      {roles.length > 0 && (
+        <>
+          <SectionTitle more={{ href: "/wiki", label: "成长百科" }}>角色指南 · 明天第一次做</SectionTitle>
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+            {roles.map((r) => (
+              <LinkTile
+                key={r.file}
+                label={r.nameZh !== r.title ? `${r.nameZh} ${r.title}` : r.title}
+                url={`/wiki/${r.group}/${r.slug}#s8`}
+                sub="第一次做要记住什么"
+                emoji={r.emoji}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      <SectionTitle>② 会中</SectionTitle>
+      <MeetingResources tools={tools} only="vote" />
+
+      <SectionTitle more={{ href: "/records", label: "全部记录" }}>③ 会后</SectionTitle>
+      <LinkTile label="写会后记录" url="/records/new" sub="1 分钟完成" emoji="✍️" tone="brand" />
+      {recent.length > 0 && (
+        <div className="card mt-2.5 divide-y divide-line">
+          {recent.map((r) => (
+            <Link key={r.id} href={`/records/${r.id}`} className="flex items-center justify-between gap-3 px-4 py-2.5">
+              <span className="min-w-0">
+                <span className="block text-xs text-ink-3">{formatDate(r.date)}</span>
+                <span className="block truncate text-sm font-semibold">{r.theme || "（未填主题）"}</span>
+              </span>
+              <span className="shrink-0 text-xs text-ink-2">
+                会员 {r.memberCount} · 嘉宾 {r.guestCount}
+              </span>
+            </Link>
+          ))}
         </div>
       )}
     </>

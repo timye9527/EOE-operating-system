@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getStore, storeMode } from "@/lib/store";
+import { getCurrentMeeting } from "@/lib/meeting";
 import { daysBetween, todayCN } from "@/lib/date";
 import type { GuestSourceCount, LinkItem, Meeting, RoleAssignment } from "@/lib/types";
 
@@ -59,6 +60,9 @@ export async function createRecord(_prev: ActionState, form: FormData): Promise<
 
   try {
     const store = await getStore();
+    // 会单即记录：同一天的例会填过角色，就自动存进这条记录（不用再填）
+    const meeting = await getCurrentMeeting();
+    const roles = meeting.date === date ? meeting.roles.filter((r) => r.name.trim()) : [];
     await store.addRecord({
       date,
       theme: text(form.get("theme"), 200),
@@ -68,6 +72,7 @@ export async function createRecord(_prev: ActionState, form: FormData): Promise<
       preparedSpeeches: int(form.get("preparedSpeeches")),
       winners: text(form.get("winners"), 500),
       reflection: text(form.get("reflection"), 500),
+      roles: roles.length ? roles : undefined,
       note: text(form.get("note")) || undefined,
     });
   } catch (e) {

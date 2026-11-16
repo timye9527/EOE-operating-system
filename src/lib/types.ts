@@ -57,6 +57,7 @@ export type MeetingRecord = {
   preparedSpeeches: number;
   winners: string;
   reflection: string; // 一句话复盘
+  roles?: RoleAssignment[]; // 当场角色名单（会后记录时若有同日例会，自动带入）
   note?: string;
   createdAt: string; // ISO
 };

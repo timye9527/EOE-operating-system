@@ -16,6 +16,7 @@ type RecordRow = {
   prepared_speeches: number;
   winners: string;
   reflection: string;
+  roles: MeetingRecord["roles"] | null;
   note: string | null;
   created_at: string;
 };
@@ -30,6 +31,7 @@ const fromRow = (r: RecordRow): MeetingRecord => ({
   preparedSpeeches: r.prepared_speeches,
   winners: r.winners,
   reflection: r.reflection,
+  roles: r.roles?.length ? r.roles : undefined,
   note: r.note ?? undefined,
   createdAt: r.created_at,
 });
@@ -76,6 +78,7 @@ export function supabaseStore(): Store {
             prepared_speeches: input.preparedSpeeches,
             winners: input.winners,
             reflection: input.reflection,
+            roles: input.roles ?? [],
             note: input.note ?? null,
           })
           .select("*")

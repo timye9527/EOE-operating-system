@@ -14,8 +14,13 @@ create table if not exists meeting_records (
   winners           text not null default '',
   reflection        text not null default '',
   note              text,
+  -- 当场角色名单 [{ "role": "计时官", "name": "小周" }, ...]
+  roles             jsonb not null default '[]'::jsonb,
   created_at        timestamptz not null default now()
 );
+
+-- 已建过表的，补一列：
+alter table meeting_records add column if not exists roles jsonb not null default '[]'::jsonb;
 
 create index if not exists meeting_records_date_idx on meeting_records (date desc);
 
